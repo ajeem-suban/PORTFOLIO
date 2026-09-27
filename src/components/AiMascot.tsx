@@ -33,6 +33,7 @@ export default function AiMascot() {
   const browTilt = useTransform(springY, [-1, 1], [3, -5])
 
   useEffect(() => {
+<<<<<<< HEAD
     const el = wrapRef.current
     if (!el) return
 
@@ -54,6 +55,12 @@ export default function AiMascot() {
       rafId = 0
       const e = lastEvent
       if (!e) return
+=======
+    const onMove = (e: MouseEvent) => {
+      const el = wrapRef.current
+      if (!el) return
+      const rect = el.getBoundingClientRect()
+>>>>>>> 73b0b4deaae20fdd8b911663b591c0360ad95913
       const cx = rect.left + rect.width / 2
       const cy = rect.top + rect.height / 2
       const dx = (e.clientX - cx) / (rect.width * 2.2)
@@ -67,6 +74,7 @@ export default function AiMascot() {
       else if (dist < rect.width * 1.8) setProximity("near")
       else setProximity("idle")
     }
+<<<<<<< HEAD
 
     const onMove = (e: MouseEvent) => {
       lastEvent = e
@@ -79,6 +87,10 @@ export default function AiMascot() {
       window.removeEventListener("resize", updateRect)
       if (rafId) cancelAnimationFrame(rafId)
     }
+=======
+    window.addEventListener("mousemove", onMove)
+    return () => window.removeEventListener("mousemove", onMove)
+>>>>>>> 73b0b4deaae20fdd8b911663b591c0360ad95913
   }, [mvX, mvY])
 
   // randomized blink loop — paused mid-wink so they don't fight

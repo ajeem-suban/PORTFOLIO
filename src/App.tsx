@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { useEffect, useRef, useState, useCallback, lazy, Suspense } from "react"
 import ProfileCard from "./components/ProfileCard"
 // Three.js + react-three-fiber are the largest dependency in the bundle
@@ -8,6 +9,12 @@ import ProfileCard from "./components/ProfileCard"
 // Three.js scene setup it didn't need to wait for.
 const ParticleField = lazy(() => import("./components/ParticleField"))
 const NameMorphParticles = lazy(() => import("./components/NameMorphParticles"))
+=======
+import { useEffect, useRef, useState, useCallback } from "react"
+import ProfileCard from "./components/ProfileCard"
+import ParticleField from "./components/ParticleField"
+import NameMorphParticles from "./components/NameMorphParticles"
+>>>>>>> 73b0b4deaae20fdd8b911663b591c0360ad95913
 import TechMarquee from "./components/TechMarquee"
 import AIHubDiagram from "./components/AIHubDiagram"
 import Reveal, { projectAssembleVariant } from "./components/Reveal"
@@ -28,11 +35,15 @@ import {
   SiDeepseek,
 } from "react-icons/si"
 import { FaLinkedin } from "react-icons/fa6"
+<<<<<<< HEAD
 import type { IconType } from "react-icons"
+=======
+>>>>>>> 73b0b4deaae20fdd8b911663b591c0360ad95913
 import logo from "@/assets/logo.svg"
 import { Database, Languages, Mail } from "lucide-react"
 import OpenAiIcon from "./components/OpenAiIcon"
 
+<<<<<<< HEAD
 // ─── Idle mount gate ────────────────────────────────────────────────────────
 // Delays mounting a subtree until the browser reports it's idle (falls back
 // to a short timeout on browsers without requestIdleCallback, e.g. Safari).
@@ -51,6 +62,8 @@ function useIdleMount(timeout = 1500) {
   return ready
 }
 
+=======
+>>>>>>> 73b0b4deaae20fdd8b911663b591c0360ad95913
 // ─── Cursor Trail ─────────────────────────────────────────────────────────────
 function Cursor() {
   const spotRef = useRef<HTMLDivElement>(null)
@@ -508,7 +521,11 @@ function Hero() {
 
         {/* right */}
         <div className="flex justify-center items-center">
+<<<<<<< HEAD
           <ProfileCard imageUrl="/profile.webp" />
+=======
+          <ProfileCard imageUrl="/profile.jpg" />
+>>>>>>> 73b0b4deaae20fdd8b911663b591c0360ad95913
         </div>
       </div>
 
@@ -525,7 +542,10 @@ function Hero() {
 
 // ─── About ────────────────────────────────────────────────────────────────────
 function About() {
+<<<<<<< HEAD
   const idleReady = useIdleMount()
+=======
+>>>>>>> 73b0b4deaae20fdd8b911663b591c0360ad95913
   const skillGroups = [
     { label: "AI / ML", items: ["Tamil NLP", "RAG Systems", "LLM Infra", "OCR/CV"] },
     { label: "Backend", items: ["FastAPI", "REST APIs", "SQLite", "Docker"] },
@@ -544,6 +564,7 @@ function About() {
                 onto the section background so the glow isn't clipped
                 or muddied by a panel behind it. */}
             <div className="w-80 h-48 md:w-[26rem] md:h-56">
+<<<<<<< HEAD
               {idleReady ? (
                 <Suspense fallback={null}>
                   <NameMorphParticles />
@@ -556,6 +577,9 @@ function About() {
                   AJEEM
                 </span>
               )}
+=======
+              <NameMorphParticles />
+>>>>>>> 73b0b4deaae20fdd8b911663b591c0360ad95913
             </div>
             {/* floating badge */}
             <div
@@ -696,6 +720,7 @@ function TiltCard({
   rounded?: string
 }) {
   const ref = useRef<HTMLDivElement>(null)
+<<<<<<< HEAD
   const rectRef = useRef<DOMRect | null>(null)
   const rafRef = useRef(0)
 
@@ -705,10 +730,13 @@ function TiltCard({
   const onEnter = useCallback(() => {
     if (ref.current) rectRef.current = ref.current.getBoundingClientRect()
   }, [])
+=======
+>>>>>>> 73b0b4deaae20fdd8b911663b591c0360ad95913
 
   const onMove = useCallback(
     (e: React.MouseEvent<HTMLDivElement>) => {
       const el = ref.current
+<<<<<<< HEAD
       if (!el || rafRef.current) return
       const { clientX, clientY } = e
       rafRef.current = requestAnimationFrame(() => {
@@ -719,16 +747,27 @@ function TiltCard({
         el.style.transform = `perspective(800px) rotateY(${x * intensity}deg) rotateX(${-y * intensity}deg) scale(1.015) translateZ(10px)`
         el.style.boxShadow = `${x * -20}px ${y * -20}px 40px rgba(139,92,246,0.2), 0 0 60px rgba(139,92,246,0.1)`
       })
+=======
+      if (!el) return
+      const rect = el.getBoundingClientRect()
+      const x = (e.clientX - rect.left) / rect.width - 0.5
+      const y = (e.clientY - rect.top) / rect.height - 0.5
+      el.style.transform = `perspective(800px) rotateY(${x * intensity}deg) rotateX(${-y * intensity}deg) scale(1.015) translateZ(10px)`
+      el.style.boxShadow = `${x * -20}px ${y * -20}px 40px rgba(139,92,246,0.2), 0 0 60px rgba(139,92,246,0.1)`
+>>>>>>> 73b0b4deaae20fdd8b911663b591c0360ad95913
     },
     [intensity],
   )
 
   const onLeave = useCallback(() => {
+<<<<<<< HEAD
     if (rafRef.current) {
       cancelAnimationFrame(rafRef.current)
       rafRef.current = 0
     }
     rectRef.current = null
+=======
+>>>>>>> 73b0b4deaae20fdd8b911663b591c0360ad95913
     const el = ref.current
     if (!el) return
     el.style.transform =
@@ -741,7 +780,10 @@ function TiltCard({
       ref={ref}
       data-project-card={showPill ? "true" : undefined}
       className={`tilt-card glass-card ${rounded} transition-shadow duration-300 ${className}`}
+<<<<<<< HEAD
       onMouseEnter={onEnter}
+=======
+>>>>>>> 73b0b4deaae20fdd8b911663b591c0360ad95913
       onMouseMove={onMove}
       onMouseLeave={onLeave}
       style={{ transformStyle: "preserve-3d" }}
@@ -808,9 +850,25 @@ function Projects() {
       desc: "Problem: emergency ambulance dispatch/routing is often manual and slow. Approach: a FastAPI + React prototype for real-time re-routing and hospital coordination, built as a college hackathon-qualifier project.",
       tags: ["Python", "FastAPI", "React", "Real-time"],
       color: "#ef4444",
+<<<<<<< HEAD
       status: "MVP Built",
       github: "https://github.com/ajeem-suban/AIRES-AI",
       huggingface: "https://huggingface.co/AJEEM-SUBAN/AIRES-AI",
+=======
+      status: "In Progress",
+      github: "https://github.com/ajeem-suban/AIRES-AI",
+      demo: "", // TODO(Ajeem): add live demo URL or a short demo GIF path here
+    },
+    {
+      name: "ROGERS",
+      tagline: "AI Student Project Orchestrator",
+      role: "Creator & Developer",
+      desc: "Problem: students have raw project ideas but no structured path from concept to a research-backed, buildable spec. Approach: a hybrid web + CLI platform that orchestrates multiple local and cloud LLMs to turn a one-line idea into a structured project plan, with support for code generation and debugging.",
+      tags: ["FastAPI", "React", "TypeScript", "Tailwind", "LLM Orchestration"],
+      color: "#3b82f6",
+      status: "In Progress",
+      github: "https://github.com/ajeem-suban/ROGERS",
+>>>>>>> 73b0b4deaae20fdd8b911663b591c0360ad95913
       demo: "", // TODO(Ajeem): add live demo URL or a short demo GIF path here
     },
     {
@@ -954,7 +1012,10 @@ function Projects() {
                     href={p.github}
                     target="_blank"
                     rel="noopener noreferrer"
+<<<<<<< HEAD
                     aria-label={p.github === "#" ? undefined : `${p.name} on GitHub`}
+=======
+>>>>>>> 73b0b4deaae20fdd8b911663b591c0360ad95913
                     className="flex items-center gap-1.5 text-xs font-medium text-purple-300 transition-colors hover:text-purple-200"
                     style={{ fontFamily: "Inter, sans-serif" }}
                     onClick={(e) => {
@@ -969,12 +1030,16 @@ function Projects() {
                       fill="none"
                       stroke="currentColor"
                       strokeWidth="2"
+<<<<<<< HEAD
                       aria-hidden="true"
                       focusable="false"
+=======
+>>>>>>> 73b0b4deaae20fdd8b911663b591c0360ad95913
                     >
                       <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" />
                     </svg>
                   </a>
+<<<<<<< HEAD
                   {p.huggingface && (
                     <a
                       href={p.huggingface}
@@ -1001,17 +1066,26 @@ function Projects() {
                       </svg>
                     </a>
                   )}
+=======
+>>>>>>> 73b0b4deaae20fdd8b911663b591c0360ad95913
                   {p.demo && (
                     <a
                       href={p.demo}
                       target="_blank"
                       rel="noopener noreferrer"
+<<<<<<< HEAD
                       aria-label={`${p.name} live demo`}
+=======
+>>>>>>> 73b0b4deaae20fdd8b911663b591c0360ad95913
                       className="flex items-center gap-1.5 text-xs font-medium transition-colors"
                       style={{ fontFamily: "Inter, sans-serif", color: p.color }}
                     >
                       <span>Live Demo</span>
+<<<<<<< HEAD
                       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true" focusable="false">
+=======
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+>>>>>>> 73b0b4deaae20fdd8b911663b591c0360ad95913
                         <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
                         <polyline points="15 3 21 3 21 9" />
                         <line x1="10" y1="14" x2="21" y2="3" />
@@ -1116,6 +1190,7 @@ function AIToolkit() {
 }
 
 // ─── Contact ──────────────────────────────────────────────────────────────────
+<<<<<<< HEAD
 // Same forced-reflow fix as TiltCard: cache the card's rect on mouse-enter
 // instead of re-reading layout on every mousemove, and batch the style
 // writes into one requestAnimationFrame callback per frame.
@@ -1197,6 +1272,8 @@ function ContactLinkCard({
   )
 }
 
+=======
+>>>>>>> 73b0b4deaae20fdd8b911663b591c0360ad95913
 function Contact() {
   const [form, setForm] = useState({ name: "", email: "", message: "" })
 
@@ -1210,7 +1287,11 @@ function Contact() {
     {
       label: "LinkedIn",
       icon: FaLinkedin,
+<<<<<<< HEAD
       href: "https://www.linkedin.com/in/ajeem-suban-1051ab341/",
+=======
+      href: "https://www.linkedin.com/in/ajeem-suban/",
+>>>>>>> 73b0b4deaae20fdd8b911663b591c0360ad95913
       desc: "ajeem-suban",
     },
     {
@@ -1394,7 +1475,52 @@ function Contact() {
           {/* links */}
           <div className="md:col-span-2 flex flex-col gap-4">
             {links.map((l) => (
+<<<<<<< HEAD
               <ContactLinkCard key={l.label} link={l} />
+=======
+              <a
+                key={l.label}
+                href={l.href}
+                className="glass-card rounded-xl p-5 flex items-center gap-4 transition-shadow duration-300"
+                style={{ transformStyle: "preserve-3d" }}
+                onMouseMove={(e) => {
+                  const el = e.currentTarget
+                  const rect = el.getBoundingClientRect()
+                  const x = (e.clientX - rect.left) / rect.width - 0.5
+                  const y = (e.clientY - rect.top) / rect.height - 0.5
+                  el.style.transform = `perspective(800px) rotateY(${x * 6}deg) rotateX(${-y * 6}deg) translateZ(4px)`
+                  el.style.borderColor = "rgba(139,92,246,0.4)"
+                  el.style.boxShadow = `0 12px 30px rgba(139,92,246,0.15)`
+                }}
+                onMouseLeave={(e) => {
+                  const el = e.currentTarget
+                  el.style.transform = ""
+                  el.style.borderColor = "rgba(139,92,246,0.2)"
+                  el.style.boxShadow = ""
+                }}
+              >
+                <div
+                  className="w-10 h-10 rounded-xl flex items-center justify-center text-purple-300 font-mono text-lg flex-shrink-0"
+                  style={{
+                    background: "rgba(139,92,246,0.1)",
+                    border: "1px solid rgba(139,92,246,0.25)",
+                  }}
+                >
+                  <l.icon size={18} />
+                </div>
+                <div>
+                  <div className="font-display font-semibold text-white text-sm">
+                    {l.label}
+                  </div>
+                  <div
+                    className="text-xs text-gray-400 mt-0.5"
+                    style={{ fontFamily: "JetBrains Mono, monospace" }}
+                  >
+                    {l.desc}
+                  </div>
+                </div>
+              </a>
+>>>>>>> 73b0b4deaae20fdd8b911663b591c0360ad95913
             ))}
 
             <div
@@ -1455,6 +1581,7 @@ function Footer() {
 
 // ─── App ──────────────────────────────────────────────────────────────────────
 export default function App() {
+<<<<<<< HEAD
   const idleReady = useIdleMount()
   return (
     <div className="relative min-h-screen bg-[#0A0A0F] noise-bg overflow-x-hidden">
@@ -1464,6 +1591,12 @@ export default function App() {
           <ParticleField />
         </Suspense>
       )}
+=======
+  return (
+    <div className="relative min-h-screen bg-[#0A0A0F] noise-bg overflow-x-hidden">
+      <BackgroundOrbs />
+      <ParticleField />
+>>>>>>> 73b0b4deaae20fdd8b911663b591c0360ad95913
       <Cursor />
       <Nav />
 

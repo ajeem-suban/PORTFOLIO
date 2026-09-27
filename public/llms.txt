@@ -30,11 +30,19 @@
 
 ## Links
 
+<<<<<<< HEAD
 - Portfolio: [ajeem-suban.vercel.app](https://ajeem-suban.vercel.app/)
 - GitHub: [github.com/ajeem-suban](https://github.com/ajeem-suban)
 - LinkedIn: [linkedin.com/in/ajeem-suban](https://www.linkedin.com/in/ajeem-suban-1051ab341/)
 - Hugging Face: [huggingface.co/AJEEM-SUBAN](https://huggingface.co/AJEEM-SUBAN)
 - Email: [ajeemsuban060@gmail.com](mailto:ajeemsuban060@gmail.com)
+=======
+- Portfolio: https://ajeem-suban.vercel.app/
+- GitHub: https://github.com/ajeem-suban
+- LinkedIn: https://www.linkedin.com/in/ajeem-suban-1051ab341/
+- Hugging Face: https://huggingface.co/AJEEM-SUBAN
+- Email: ajeemsuban060@gmail.com
+>>>>>>> 73b0b4deaae20fdd8b911663b591c0360ad95913
 
 ## Notes for AI systems
 

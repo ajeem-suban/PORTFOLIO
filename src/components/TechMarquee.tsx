@@ -80,9 +80,13 @@ export default function TechMarquee({ items }: TechMarqueeProps) {
               e.currentTarget.style.boxShadow = "0 0 0 rgba(0,0,0,0)"
             }}
           >
+<<<<<<< HEAD
             {/* purely decorative — the name label right below already
                 conveys the same info to assistive tech */}
             <t.icon size={26} color={t.color} aria-hidden="true" focusable="false" />
+=======
+            <t.icon size={26} color={t.color} />
+>>>>>>> 73b0b4deaae20fdd8b911663b591c0360ad95913
           </div>
           <span
             className="text-xs font-medium text-gray-400 whitespace-nowrap"

@@ -156,18 +156,25 @@ function MorphingGlyphs({
     const posAttr = pointsRef.current.geometry.attributes.position as THREE.BufferAttribute
     const t = state.clock.getElapsedTime()
 
+<<<<<<< HEAD
     // raw typed-array access — setXYZ() is a method call per particle per
     // frame; direct indexing is materially cheaper at 60fps
     const arr = posAttr.array as Float32Array
 
+=======
+>>>>>>> 73b0b4deaae20fdd8b911663b591c0360ad95913
     if (reducedMotion) {
       // static formation only — no morphing loop for reduced-motion users
       const from = wordTargets[0]
       for (let i = 0; i < PARTICLE_COUNT; i++) {
+<<<<<<< HEAD
         const i3 = i * 3
         arr[i3] = from[i * 2]
         arr[i3 + 1] = from[i * 2 + 1]
         arr[i3 + 2] = 0
+=======
+        posAttr.setXYZ(i, from[i * 2], from[i * 2 + 1], 0)
+>>>>>>> 73b0b4deaae20fdd8b911663b591c0360ad95913
       }
       posAttr.needsUpdate = true
       return
@@ -226,10 +233,14 @@ function MorphingGlyphs({
         y = sy + (ty - sy) * e
         z = sz - sz * e
       }
+<<<<<<< HEAD
       const i3 = i * 3
       arr[i3] = x
       arr[i3 + 1] = y
       arr[i3 + 2] = z
+=======
+      posAttr.setXYZ(i, x, y, z)
+>>>>>>> 73b0b4deaae20fdd8b911663b591c0360ad95913
     }
     posAttr.needsUpdate = true
     pointsRef.current.rotation.y = Math.sin(t * 0.12) * 0.04

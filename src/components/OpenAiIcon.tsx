@@ -1,5 +1,9 @@
 interface OpenAiIconProps {
+<<<<<<< HEAD
   size?: number | string
+=======
+  size?: number
+>>>>>>> 73b0b4deaae20fdd8b911663b591c0360ad95913
   color?: string
 }
 
