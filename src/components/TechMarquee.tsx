@@ -1,4 +1,4 @@
-import { useRef, useEffect } from "react"
+﻿import { useRef, useEffect } from "react"
 import { gsap } from "gsap"
 import { motion } from "framer-motion"
 import type { IconType } from "react-icons"
@@ -16,7 +16,7 @@ interface TechMarqueeProps {
 /**
  * Two infinite horizontal rows moving in opposite directions. Each row's
  * item list is duplicated once so the loop can reset seamlessly
- * (translateX(-50%) lands exactly back on the start of the duplicate set —
+ * (translateX(-50%) lands exactly back on the start of the duplicate set â€”
  * no visible jump). Each row also slides in from its own side (row 1 from
  * the left, row 2 from the right) and replays that entrance every time the
  * section scrolls back into view.
@@ -80,13 +80,9 @@ export default function TechMarquee({ items }: TechMarqueeProps) {
               e.currentTarget.style.boxShadow = "0 0 0 rgba(0,0,0,0)"
             }}
           >
-<<<<<<< HEAD
-            {/* purely decorative — the name label right below already
+            {/* purely decorative â€” the name label right below already
                 conveys the same info to assistive tech */}
             <t.icon size={26} color={t.color} aria-hidden="true" focusable="false" />
-=======
-            <t.icon size={26} color={t.color} />
->>>>>>> 73b0b4deaae20fdd8b911663b591c0360ad95913
           </div>
           <span
             className="text-xs font-medium text-gray-400 whitespace-nowrap"
@@ -101,7 +97,7 @@ export default function TechMarquee({ items }: TechMarqueeProps) {
 
   return (
     <div className="flex flex-col gap-2">
-      {/* row 1 — slides in from the left, scrolls right-to-left */}
+      {/* row 1 â€” slides in from the left, scrolls right-to-left */}
       <motion.div
         className="marquee-viewport"
         initial={{ opacity: 0, x: -70 }}
@@ -117,7 +113,7 @@ export default function TechMarquee({ items }: TechMarqueeProps) {
         </div>
       </motion.div>
 
-      {/* row 2 — slides in from the right, scrolls left-to-right */}
+      {/* row 2 â€” slides in from the right, scrolls left-to-right */}
       <motion.div
         className="marquee-viewport"
         initial={{ opacity: 0, x: 70 }}

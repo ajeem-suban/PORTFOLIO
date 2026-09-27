@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react"
+﻿import { useEffect, useRef, useState } from "react"
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion"
 
 /**
@@ -33,11 +33,10 @@ export default function AiMascot() {
   const browTilt = useTransform(springY, [-1, 1], [3, -5])
 
   useEffect(() => {
-<<<<<<< HEAD
     const el = wrapRef.current
     if (!el) return
 
-    // measure only on mount + resize, never inside the mousemove handler —
+    // measure only on mount + resize, never inside the mousemove handler â€”
     // this was firing getBoundingClientRect() on every window mousemove
     // event (a forced layout reflow, since other JS on the page writes
     // styles every frame), which is the exact "Forced reflow" cost
@@ -55,12 +54,6 @@ export default function AiMascot() {
       rafId = 0
       const e = lastEvent
       if (!e) return
-=======
-    const onMove = (e: MouseEvent) => {
-      const el = wrapRef.current
-      if (!el) return
-      const rect = el.getBoundingClientRect()
->>>>>>> 73b0b4deaae20fdd8b911663b591c0360ad95913
       const cx = rect.left + rect.width / 2
       const cy = rect.top + rect.height / 2
       const dx = (e.clientX - cx) / (rect.width * 2.2)
@@ -74,7 +67,6 @@ export default function AiMascot() {
       else if (dist < rect.width * 1.8) setProximity("near")
       else setProximity("idle")
     }
-<<<<<<< HEAD
 
     const onMove = (e: MouseEvent) => {
       lastEvent = e
@@ -87,13 +79,9 @@ export default function AiMascot() {
       window.removeEventListener("resize", updateRect)
       if (rafId) cancelAnimationFrame(rafId)
     }
-=======
-    window.addEventListener("mousemove", onMove)
-    return () => window.removeEventListener("mousemove", onMove)
->>>>>>> 73b0b4deaae20fdd8b911663b591c0360ad95913
   }, [mvX, mvY])
 
-  // randomized blink loop — paused mid-wink so they don't fight
+  // randomized blink loop â€” paused mid-wink so they don't fight
   useEffect(() => {
     let timer: number
     const scheduleBlink = () => {
@@ -152,7 +140,7 @@ export default function AiMascot() {
             </radialGradient>
           </defs>
 
-          {/* outer ambient glow — brightens when excited */}
+          {/* outer ambient glow â€” brightens when excited */}
           <motion.ellipse
             cx="100"
             cy="110"
@@ -170,7 +158,7 @@ export default function AiMascot() {
 
           {/* head */}
           <circle cx="100" cy="105" r="82" fill="url(#mascot-body)" stroke="#e4e6ec" strokeWidth="1.5" />
-          {/* antenna — pulses brighter when excited */}
+          {/* antenna â€” pulses brighter when excited */}
           <rect x="88" y="10" width="24" height="16" rx="8" fill="#3b3f4c" />
           <motion.rect
             x="94"
@@ -185,7 +173,7 @@ export default function AiMascot() {
           {/* screen/face */}
           <rect x="34" y="58" width="132" height="106" rx="40" fill="#07070d" />
 
-          {/* blush — only shows up when excited */}
+          {/* blush â€” only shows up when excited */}
           <motion.circle
             cx="52"
             cy="130"
@@ -203,7 +191,7 @@ export default function AiMascot() {
             transition={{ duration: 0.25 }}
           />
 
-          {/* eyebrows — tilt with cursor Y, raise together when excited */}
+          {/* eyebrows â€” tilt with cursor Y, raise together when excited */}
           <motion.path
             d="M62 92 Q72 84 84 90"
             stroke="#67e8f9"
@@ -253,7 +241,7 @@ export default function AiMascot() {
             />
           </g>
 
-          {/* right eye — this is the one that winks on click */}
+          {/* right eye â€” this is the one that winks on click */}
           <g>
             <motion.ellipse
               cx="127"
@@ -283,7 +271,7 @@ export default function AiMascot() {
             />
           </g>
 
-          {/* mouth — flat idle -> gentle smile near -> open happy smile excited */}
+          {/* mouth â€” flat idle -> gentle smile near -> open happy smile excited */}
           <motion.path
             stroke="#38e0ff"
             strokeWidth="4"

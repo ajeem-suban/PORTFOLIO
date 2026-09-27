@@ -1,15 +1,11 @@
-interface OpenAiIconProps {
-<<<<<<< HEAD
+﻿interface OpenAiIconProps {
   size?: number | string
-=======
-  size?: number
->>>>>>> 73b0b4deaae20fdd8b911663b591c0360ad95913
   color?: string
 }
 
 /**
  * Minimal OpenAI "knot" logomark, drawn as plain SVG so the AI Toolkit hub
- * can show ChatGPT's real symbol instead of a generic bot icon — the
+ * can show ChatGPT's real symbol instead of a generic bot icon â€” the
  * react-icons/si bundle in this project doesn't ship SiOpenai/SiChatgpt.
  */
 export default function OpenAiIcon({ size = 24, color = "currentColor" }: OpenAiIconProps) {

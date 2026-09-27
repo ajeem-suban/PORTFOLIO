@@ -139,12 +139,8 @@ export default function AIHubDiagram({ tools }: AIHubDiagramProps) {
                 boxShadow: `0 0 20px ${t.color}33`,
               }}
             >
-<<<<<<< HEAD
               {/* decorative — the name label below carries the accessible text */}
               <t.icon size={24} color={t.color} aria-hidden="true" focusable="false" />
-=======
-              <t.icon size={24} color={t.color} />
->>>>>>> 73b0b4deaae20fdd8b911663b591c0360ad95913
             </div>
             <span
               className="text-xs font-medium text-gray-300 text-center"

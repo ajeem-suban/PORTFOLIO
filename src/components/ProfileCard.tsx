@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react"
+﻿import { useEffect, useRef, useState } from "react"
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion"
 
 interface ProfileCardProps {
@@ -11,7 +11,7 @@ interface ProfileCardProps {
  * - A light-reactive glow that shifts direction with the tilt
  * - IN animation is mount-triggered (not whileInView) so it slides in
  *   left-to-right exactly once per page load/refresh, and does NOT replay
- *   on scroll-away/scroll-back — that's a deliberate contrast with the rest
+ *   on scroll-away/scroll-back â€” that's a deliberate contrast with the rest
  *   of the site's repeat-on-scroll sections. The ring-sweep fires once on
  *   mount, in sync with the slide finishing.
  */
@@ -40,7 +40,6 @@ export default function ProfileCard({ imageUrl }: ProfileCardProps) {
   const glowX = useTransform(springX, [-0.5, 0.5], ["20%", "80%"])
   const glowY = useTransform(springY, [-0.5, 0.5], ["20%", "80%"])
 
-<<<<<<< HEAD
   const rectRef = useRef<DOMRect | null>(null)
   const rafRef = useRef(0)
 
@@ -66,17 +65,6 @@ export default function ProfileCard({ imageUrl }: ProfileCardProps) {
       rafRef.current = 0
     }
     rectRef.current = null
-=======
-  const handleMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    const el = cardRef.current
-    if (!el) return
-    const rect = el.getBoundingClientRect()
-    mvX.set((e.clientX - rect.left) / rect.width - 0.5)
-    mvY.set((e.clientY - rect.top) / rect.height - 0.5)
-  }
-
-  const handleLeave = () => {
->>>>>>> 73b0b4deaae20fdd8b911663b591c0360ad95913
     mvX.set(0)
     mvY.set(0)
   }
@@ -93,10 +81,7 @@ export default function ProfileCard({ imageUrl }: ProfileCardProps) {
     >
       <motion.div
         ref={cardRef}
-<<<<<<< HEAD
         onMouseEnter={handleEnter}
-=======
->>>>>>> 73b0b4deaae20fdd8b911663b591c0360ad95913
         onMouseMove={handleMove}
         onMouseLeave={handleLeave}
         className="profile-card relative rounded-[2rem] overflow-hidden glass-card"
@@ -125,7 +110,7 @@ export default function ProfileCard({ imageUrl }: ProfileCardProps) {
           style={{ border: "1px solid rgba(139,92,246,0.35)" }}
         />
 
-        {/* one-shot conic sweep around the card edge — key change forces a
+        {/* one-shot conic sweep around the card edge â€” key change forces a
             remount so the CSS animation restarts on every re-entrance */}
         <div key={sweepKey} className="profile-ring-sweep" />
 
@@ -133,14 +118,11 @@ export default function ProfileCard({ imageUrl }: ProfileCardProps) {
           src={imageUrl}
           alt="Ajeem Suban, AI & Data Science Developer and founder of TAMIL-AI"
           className="w-full h-full object-cover"
-<<<<<<< HEAD
           width={640}
           height={640}
           loading="eager"
           fetchPriority="high"
           decoding="async"
-=======
->>>>>>> 73b0b4deaae20fdd8b911663b591c0360ad95913
           style={{ transform: "translateZ(30px)" }}
         />
 

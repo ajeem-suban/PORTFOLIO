@@ -1,13 +1,13 @@
-import { useEffect, useMemo, useRef, useState } from "react"
+﻿import { useEffect, useMemo, useRef, useState } from "react"
 import { Canvas, useFrame } from "@react-three/fiber"
 import * as THREE from "three"
 
 const WORDS = ["AJEEM", "AI", "DEV"]
 const PARTICLE_COUNT = 460
-// bright white — the previous purple palette had almost no contrast
+// bright white â€” the previous purple palette had almost no contrast
 // against the (now-removed) purple gradient panel behind it
 const COLORS = ["#ffffff"]
-// per-word hold time — AJEEM (the name) is held noticeably longer than
+// per-word hold time â€” AJEEM (the name) is held noticeably longer than
 // AI/DEV so it reads as the primary, most-visible formation in the loop
 const HOLDS = [2.4, 1.2, 1.2]
 const TRANSITION_S = 1.1
@@ -43,7 +43,7 @@ function generateGlowTexture() {
  * Rasterizes `word` to an offscreen canvas sized to its own bounding box,
  * then reads back every filled pixel as a candidate point. Points are
  * stride-sampled (or repeated) down/up to exactly `count`, so every word
- * maps onto the SAME fixed-size particle pool — that 1:1 index mapping is
+ * maps onto the SAME fixed-size particle pool â€” that 1:1 index mapping is
  * what makes morphing between words possible instead of just cross-fading
  * two unrelated point clouds.
  */
@@ -82,7 +82,7 @@ function sampleWordPoints(word: string, count: number): Float32Array {
   if (pairCount === 0) return points
 
   // world-space scale tuned to fill the camera frustum set up below
-  // (fov 45 at z=3.2 gives ~±1.3 visible half-height/width)
+  // (fov 45 at z=3.2 gives ~Â±1.3 visible half-height/width)
   const SCALE = 2.5
   for (let i = 0; i < count; i++) {
     const idx = Math.floor((i / count) * pairCount)
@@ -156,25 +156,18 @@ function MorphingGlyphs({
     const posAttr = pointsRef.current.geometry.attributes.position as THREE.BufferAttribute
     const t = state.clock.getElapsedTime()
 
-<<<<<<< HEAD
-    // raw typed-array access — setXYZ() is a method call per particle per
+    // raw typed-array access â€” setXYZ() is a method call per particle per
     // frame; direct indexing is materially cheaper at 60fps
     const arr = posAttr.array as Float32Array
 
-=======
->>>>>>> 73b0b4deaae20fdd8b911663b591c0360ad95913
     if (reducedMotion) {
-      // static formation only — no morphing loop for reduced-motion users
+      // static formation only â€” no morphing loop for reduced-motion users
       const from = wordTargets[0]
       for (let i = 0; i < PARTICLE_COUNT; i++) {
-<<<<<<< HEAD
         const i3 = i * 3
         arr[i3] = from[i * 2]
         arr[i3 + 1] = from[i * 2 + 1]
         arr[i3 + 2] = 0
-=======
-        posAttr.setXYZ(i, from[i * 2], from[i * 2 + 1], 0)
->>>>>>> 73b0b4deaae20fdd8b911663b591c0360ad95913
       }
       posAttr.needsUpdate = true
       return
@@ -233,19 +226,15 @@ function MorphingGlyphs({
         y = sy + (ty - sy) * e
         z = sz - sz * e
       }
-<<<<<<< HEAD
       const i3 = i * 3
       arr[i3] = x
       arr[i3 + 1] = y
       arr[i3 + 2] = z
-=======
-      posAttr.setXYZ(i, x, y, z)
->>>>>>> 73b0b4deaae20fdd8b911663b591c0360ad95913
     }
     posAttr.needsUpdate = true
     pointsRef.current.rotation.y = Math.sin(t * 0.12) * 0.04
 
-    // whole-field twinkle pulse — same technique as ParticleField.tsx.
+    // whole-field twinkle pulse â€” same technique as ParticleField.tsx.
     // AJEEM (wordIdx 0) also gets a base scale boost so the name reads
     // larger/more prominent than the AI/DEV formations.
     const nameBoost = wordIdx === 0 ? 1.15 : 1.0
@@ -281,7 +270,7 @@ function MorphingGlyphs({
  * as ParticleField.tsx so it reads as part of the same visual system
  * rather than a bolted-on effect.
  *
- * Deliberately scoped to this one card — no page-wide takeover, no
+ * Deliberately scoped to this one card â€” no page-wide takeover, no
  * postprocessing pipeline (bloom/DOF) added, since a 224px card doesn't
  * need it and it would be a meaningful perf/dependency cost for a small
  * decorative element.
@@ -297,7 +286,7 @@ export default function NameMorphParticles() {
     const onMotionChange = () => setReducedMotion(mq.matches)
     mq.addEventListener("change", onMotionChange)
 
-    // pause rendering when the tab isn't visible, same as ParticleField —
+    // pause rendering when the tab isn't visible, same as ParticleField â€”
     // avoids burning GPU on a hidden background layer
     const onVisibility = () => setVisible(document.visibilityState === "visible")
     document.addEventListener("visibilitychange", onVisibility)
@@ -320,7 +309,7 @@ export default function NameMorphParticles() {
         </Canvas>
       ) : (
         // brief placeholder shown only while fonts confirm ready and the
-        // first glyph sample runs — prevents an empty flash on mount
+        // first glyph sample runs â€” prevents an empty flash on mount
         <span
           className="font-display font-black text-2xl text-white tracking-wide"
           style={{ opacity: 0.4, fontFamily: "Outfit, sans-serif" }}

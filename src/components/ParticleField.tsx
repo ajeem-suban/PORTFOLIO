@@ -1,14 +1,10 @@
-import { useMemo, useRef, useEffect, useState } from "react"
+﻿import { useMemo, useRef, useEffect, useState } from "react"
 import { Canvas, useFrame } from "@react-three/fiber"
 import * as THREE from "three"
 
-<<<<<<< HEAD
-// Was 700 — this loop runs every frame; each unit here costs a handful of
+// Was 700 â€” this loop runs every frame; each unit here costs a handful of
 // array writes at 60fps, so trimming it is a direct, easy CPU win.
 const PARTICLE_COUNT = 450
-=======
-const PARTICLE_COUNT = 700
->>>>>>> 73b0b4deaae20fdd8b911663b591c0360ad95913
 // palette matches the rest of the site (hero glow / accent colors)
 const COLORS = ["#a78bfa", "#8b5cf6", "#c084fc", "#06b6d4"]
 
@@ -64,8 +60,7 @@ function Glitter({ mouse }: { mouse: React.RefObject<{ x: number; y: number }> }
     const t = state.clock.getElapsedTime()
     const posAttr = pointsRef.current.geometry.attributes
       .position as THREE.BufferAttribute
-<<<<<<< HEAD
-    // raw typed-array access — avoids ~1,800 getX/getY/setX/setY method
+    // raw typed-array access â€” avoids ~1,800 getX/getY/setX/setY method
     // calls per frame that BufferAttribute's accessor API would otherwise cost
     const arr = posAttr.array as Float32Array
 
@@ -76,18 +71,6 @@ function Glitter({ mouse }: { mouse: React.RefObject<{ x: number; y: number }> }
       if (y > 10) y = -10
       arr[i3 + 1] = y
       arr[i3] += Math.sin(t * 0.15 + i) * 0.003
-=======
-
-    for (let i = 0; i < PARTICLE_COUNT; i++) {
-      // gentle upward drift + per-particle sideways sway, wraps around
-      const baseY = posAttr.getY(i)
-      let y = baseY + speeds[i] * 0.01
-      if (y > 10) y = -10
-      posAttr.setY(i, y)
-
-      const swayX = Math.sin(t * 0.15 + i) * 0.003
-      posAttr.setX(i, posAttr.getX(i) + swayX)
->>>>>>> 73b0b4deaae20fdd8b911663b591c0360ad95913
     }
     posAttr.needsUpdate = true
 
@@ -147,7 +130,7 @@ export default function ParticleField() {
       mouse.current.x = e.clientX / window.innerWidth - 0.5
       mouse.current.y = e.clientY / window.innerHeight - 0.5
     }
-    // pause rendering when the tab isn't visible — biggest perf risk on a
+    // pause rendering when the tab isn't visible â€” biggest perf risk on a
     // background layer that runs continuously on every page
     const onVisibility = () => setVisible(document.visibilityState === "visible")
 

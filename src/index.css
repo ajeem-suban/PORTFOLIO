@@ -1,8 +1,3 @@
-<<<<<<< HEAD
-=======
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
-
->>>>>>> 73b0b4deaae20fdd8b911663b591c0360ad95913
 @import 'tailwindcss';
 
 @theme {
@@ -31,7 +26,6 @@ body {
   50% { transform: translateY(-20px) rotate(5deg); }
 }
 
-<<<<<<< HEAD
 /* Animates opacity/transform instead of box-shadow — box-shadow is a paint
    property (repaints the element every frame, flagged by PageSpeed as a
    non-composited animation); opacity+transform run entirely on the
@@ -39,11 +33,6 @@ body {
 @keyframes pulse-glow {
   0%, 100% { opacity: 0.55; transform: scale(1); }
   50% { opacity: 1; transform: scale(1.035); }
-=======
-@keyframes pulse-glow {
-  0%, 100% { box-shadow: 0 0 20px rgba(139,92,246,0.3), 0 0 40px rgba(139,92,246,0.1); }
-  50% { box-shadow: 0 0 40px rgba(139,92,246,0.6), 0 0 80px rgba(139,92,246,0.2); }
->>>>>>> 73b0b4deaae20fdd8b911663b591c0360ad95913
 }
 
 @keyframes orb-drift {
@@ -101,15 +90,11 @@ body {
 }
 
 .animate-float { animation: float 6s ease-in-out infinite; }
-<<<<<<< HEAD
 .animate-pulse-glow {
   animation: pulse-glow 3s ease-in-out infinite;
   box-shadow: 0 0 30px rgba(139,92,246,0.45), 0 0 60px rgba(139,92,246,0.15);
   will-change: opacity, transform;
 }
-=======
-.animate-pulse-glow { animation: pulse-glow 3s ease-in-out infinite; }
->>>>>>> 73b0b4deaae20fdd8b911663b591c0360ad95913
 .animate-orb { animation: orb-drift 20s ease-in-out infinite; }
 .animate-fade-up { animation: fade-up 0.7s ease forwards; }
 .animate-spin-slow { animation: spin-slow 20s linear infinite; }
