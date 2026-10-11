@@ -1,17 +1,26 @@
-import { useEffect, useRef, useState, useCallback, lazy, Suspense } from "react"
-import ProfileCard from "./components/ProfileCard"
+import {
+  useEffect,
+  useRef,
+  useState,
+  useCallback,
+  lazy,
+  Suspense,
+} from "react";
+import ProfileCard from "./components/ProfileCard";
 // Three.js + react-three-fiber are the largest dependency in the bundle
 // (~190 KiB unused on first load per PageSpeed) and are purely decorative,
 // so both canvases are code-split into their own chunk and only mounted
 // after the browser is idle post-paint — see useIdleMount below. This is
 // what was blocking the hero text (the actual LCP element) behind ~3.2s of
 // Three.js scene setup it didn't need to wait for.
-const ParticleField = lazy(() => import("./components/ParticleField"))
-const NameMorphParticles = lazy(() => import("./components/NameMorphParticles"))
-import TechMarquee from "./components/TechMarquee"
-import AIHubDiagram from "./components/AIHubDiagram"
-import Reveal, { projectAssembleVariant } from "./components/Reveal"
-import { motion } from "framer-motion"
+const ParticleField = lazy(() => import("./components/ParticleField"));
+const NameMorphParticles = lazy(
+  () => import("./components/NameMorphParticles"),
+);
+import TechMarquee from "./components/TechMarquee";
+import AIHubDiagram from "./components/AIHubDiagram";
+import Reveal, { projectAssembleVariant } from "./components/Reveal";
+import { motion } from "framer-motion";
 import {
   SiPython,
   SiFastapi,
@@ -26,12 +35,12 @@ import {
   SiGooglegemini,
   SiPerplexity,
   SiDeepseek,
-} from "react-icons/si"
-import { FaLinkedin } from "react-icons/fa6"
-import type { IconType } from "react-icons"
-import logo from "@/assets/logo.svg"
-import { Database, Languages, Mail } from "lucide-react"
-import OpenAiIcon from "./components/OpenAiIcon"
+} from "react-icons/si";
+import { FaLinkedin } from "react-icons/fa6";
+import type { IconType } from "react-icons";
+import logo from "@/assets/logo.svg";
+import { Database, Languages, Mail } from "lucide-react";
+import OpenAiIcon from "./components/OpenAiIcon";
 
 // ─── Idle mount gate ────────────────────────────────────────────────────────
 // Delays mounting a subtree until the browser reports it's idle (falls back
@@ -39,69 +48,69 @@ import OpenAiIcon from "./components/OpenAiIcon"
 // Used to keep the decorative Three.js canvases from competing with the
 // initial paint for main-thread time.
 function useIdleMount(timeout = 1500) {
-  const [ready, setReady] = useState(false)
+  const [ready, setReady] = useState(false);
   useEffect(() => {
     if (typeof window.requestIdleCallback === "function") {
-      const id = window.requestIdleCallback(() => setReady(true), { timeout })
-      return () => window.cancelIdleCallback(id)
+      const id = window.requestIdleCallback(() => setReady(true), { timeout });
+      return () => window.cancelIdleCallback(id);
     }
-    const id = window.setTimeout(() => setReady(true), 200)
-    return () => window.clearTimeout(id)
-  }, [timeout])
-  return ready
+    const id = window.setTimeout(() => setReady(true), 200);
+    return () => window.clearTimeout(id);
+  }, [timeout]);
+  return ready;
 }
 
 // ─── Cursor Trail ─────────────────────────────────────────────────────────────
 function Cursor() {
-  const spotRef = useRef<HTMLDivElement>(null)
-  const pillRef = useRef<HTMLDivElement>(null)
-  const pos = useRef({ x: 0, y: 0 })
-  const lastSpawn = useRef(0)
-  const trailId = useRef(0)
-  const [pill, setPill] = useState(false)
+  const spotRef = useRef<HTMLDivElement>(null);
+  const pillRef = useRef<HTMLDivElement>(null);
+  const pos = useRef({ x: 0, y: 0 });
+  const lastSpawn = useRef(0);
+  const trailId = useRef(0);
+  const [pill, setPill] = useState(false);
   const [trail, setTrail] = useState<{ id: number; x: number; y: number }[]>(
     [],
-  )
+  );
 
   useEffect(() => {
     const onMove = (e: MouseEvent) => {
-      pos.current = { x: e.clientX, y: e.clientY }
+      pos.current = { x: e.clientX, y: e.clientY };
       if (spotRef.current) {
-        spotRef.current.style.left = e.clientX + "px"
-        spotRef.current.style.top = e.clientY + "px"
+        spotRef.current.style.left = e.clientX + "px";
+        spotRef.current.style.top = e.clientY + "px";
       }
       if (pillRef.current) {
-        pillRef.current.style.left = e.clientX + "px"
-        pillRef.current.style.top = e.clientY + "px"
+        pillRef.current.style.left = e.clientX + "px";
+        pillRef.current.style.top = e.clientY + "px";
       }
 
       // spawn a trail dot every ~35ms, self-removes after its fade animation
-      const now = performance.now()
+      const now = performance.now();
       if (now - lastSpawn.current > 35) {
-        lastSpawn.current = now
-        trailId.current += 1
-        const id = trailId.current
-        setTrail((t) => [...t.slice(-18), { id, x: e.clientX, y: e.clientY }])
+        lastSpawn.current = now;
+        trailId.current += 1;
+        const id = trailId.current;
+        setTrail((t) => [...t.slice(-18), { id, x: e.clientX, y: e.clientY }]);
         window.setTimeout(() => {
-          setTrail((t) => t.filter((p) => p.id !== id))
-        }, 550)
+          setTrail((t) => t.filter((p) => p.id !== id));
+        }, 550);
       }
-    }
+    };
 
     const onEnterCard = (e: Event) => {
-      const t = e.target as HTMLElement
-      if (t.closest("[data-project-card]")) setPill(true)
-    }
-    const onLeaveCard = () => setPill(false)
+      const t = e.target as HTMLElement;
+      if (t.closest("[data-project-card]")) setPill(true);
+    };
+    const onLeaveCard = () => setPill(false);
 
     document.querySelectorAll("a,button,[data-project-card]").forEach((el) => {
-      el.addEventListener("mouseenter", onEnterCard)
-      el.addEventListener("mouseleave", onLeaveCard)
-    })
+      el.addEventListener("mouseenter", onEnterCard);
+      el.addEventListener("mouseleave", onLeaveCard);
+    });
 
-    document.addEventListener("mousemove", onMove)
-    return () => document.removeEventListener("mousemove", onMove)
-  }, [])
+    document.addEventListener("mousemove", onMove);
+    return () => document.removeEventListener("mousemove", onMove);
+  }, []);
 
   return (
     <>
@@ -158,29 +167,29 @@ function Cursor() {
         View Project →
       </div>
     </>
-  )
+  );
 }
 
 // ─── Background Orbs ──────────────────────────────────────────────────────────
 function BackgroundOrbs() {
-  const wrap1 = useRef<HTMLDivElement>(null)
-  const wrap2 = useRef<HTMLDivElement>(null)
-  const wrap3 = useRef<HTMLDivElement>(null)
+  const wrap1 = useRef<HTMLDivElement>(null);
+  const wrap2 = useRef<HTMLDivElement>(null);
+  const wrap3 = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const wraps = [wrap1.current, wrap2.current, wrap3.current]
-    const depths = [18, 30, 12] // px of parallax travel per orb, varies for depth
+    const wraps = [wrap1.current, wrap2.current, wrap3.current];
+    const depths = [18, 30, 12]; // px of parallax travel per orb, varies for depth
     const onMove = (e: MouseEvent) => {
-      const nx = e.clientX / window.innerWidth - 0.5
-      const ny = e.clientY / window.innerHeight - 0.5
+      const nx = e.clientX / window.innerWidth - 0.5;
+      const ny = e.clientY / window.innerHeight - 0.5;
       wraps.forEach((w, i) => {
-        if (!w) return
-        w.style.transform = `translate(${nx * depths[i]}px, ${ny * depths[i]}px)`
-      })
-    }
-    window.addEventListener("mousemove", onMove)
-    return () => window.removeEventListener("mousemove", onMove)
-  }, [])
+        if (!w) return;
+        w.style.transform = `translate(${nx * depths[i]}px, ${ny * depths[i]}px)`;
+      });
+    };
+    window.addEventListener("mousemove", onMove);
+    return () => window.removeEventListener("mousemove", onMove);
+  }, []);
 
   return (
     <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden">
@@ -189,7 +198,11 @@ function BackgroundOrbs() {
       <div
         ref={wrap1}
         className="absolute"
-        style={{ left: "-15%", top: "-10%", transition: "transform 0.6s ease-out" }}
+        style={{
+          left: "-15%",
+          top: "-10%",
+          transition: "transform 0.6s ease-out",
+        }}
       >
         <div
           className="animate-orb"
@@ -206,7 +219,11 @@ function BackgroundOrbs() {
       <div
         ref={wrap2}
         className="absolute"
-        style={{ right: "-10%", top: "30%", transition: "transform 0.6s ease-out" }}
+        style={{
+          right: "-10%",
+          top: "30%",
+          transition: "transform 0.6s ease-out",
+        }}
       >
         <div
           className="animate-orb"
@@ -224,7 +241,11 @@ function BackgroundOrbs() {
       <div
         ref={wrap3}
         className="absolute"
-        style={{ left: "30%", bottom: "-10%", transition: "transform 0.6s ease-out" }}
+        style={{
+          left: "30%",
+          bottom: "-10%",
+          transition: "transform 0.6s ease-out",
+        }}
       >
         <div
           className="animate-orb"
@@ -240,18 +261,18 @@ function BackgroundOrbs() {
         />
       </div>
     </div>
-  )
+  );
 }
 
 // ─── Nav ──────────────────────────────────────────────────────────────────────
 function Nav() {
-  const [scrolled, setScrolled] = useState(false)
+  const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 40)
-    window.addEventListener("scroll", onScroll)
-    return () => window.removeEventListener("scroll", onScroll)
-  }, [])
+    const onScroll = () => setScrolled(window.scrollY > 40);
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   const links = [
     { label: "About", id: "about" },
@@ -259,7 +280,7 @@ function Nav() {
     { label: "Projects", id: "projects" },
     { label: "AI Toolkit", id: "ai-toolkit" },
     { label: "Contact", id: "contact" },
-  ]
+  ];
 
   return (
     <nav
@@ -299,8 +320,12 @@ function Nav() {
                 color: "#c4b5fd",
                 fontFamily: "Inter, sans-serif",
               }}
-              onMouseEnter={(e) => (e.currentTarget.style.borderColor = "rgba(139,92,246,0.8)")}
-              onMouseLeave={(e) => (e.currentTarget.style.borderColor = "rgba(139,92,246,0.4)")}
+              onMouseEnter={(e) =>
+                (e.currentTarget.style.borderColor = "rgba(139,92,246,0.8)")
+              }
+              onMouseLeave={(e) =>
+                (e.currentTarget.style.borderColor = "rgba(139,92,246,0.4)")
+              }
             >
               Resume
             </a>
@@ -327,7 +352,7 @@ function Nav() {
         </div>
       </div>
     </nav>
-  )
+  );
 }
 
 // ─── Hero ─────────────────────────────────────────────────────────────────────
@@ -374,7 +399,10 @@ function Hero() {
           >
             <span
               className="text-white block"
-              style={{ fontSize: "clamp(1.3rem,2.6vw,1.75rem)", fontWeight: 700 }}
+              style={{
+                fontSize: "clamp(1.3rem,2.6vw,1.75rem)",
+                fontWeight: 700,
+              }}
             >
               Hi, I'm
             </span>
@@ -398,7 +426,6 @@ function Hero() {
             </span>
           </h1>
 
-
           <p
             className="text-lg text-gray-300 mb-2 font-medium"
             style={{ fontFamily: "Inter, sans-serif" }}
@@ -409,11 +436,12 @@ function Hero() {
             className="text-base text-gray-400 mb-8 leading-relaxed max-w-md"
             style={{ fontFamily: "Inter, sans-serif" }}
           >
-            I build AI/ML and NLP systems — RAG pipelines, LLM applications,
-            and OCR tools. My flagship project, <strong className="text-gray-300 font-medium">TAMIL-AI</strong>, is a
-            Tamil-first NLP platform bridging Chola-era inscriptions with
-            modern language AI. 3rd-year B.Tech AI &amp; Data Science student
-            at Dhanalakshmi Srinivasan University.
+            I build AI/ML and NLP systems — RAG pipelines, LLM applications, and
+            OCR tools. My flagship project,{" "}
+            <strong className="text-gray-300 font-medium">TAMIL-AI</strong>, is
+            a Tamil-first NLP platform bridging Chola-era inscriptions with
+            modern language AI. 3rd-year B.Tech AI &amp; Data Science student at
+            Dhanalakshmi Srinivasan University.
           </p>
 
           <div className="flex flex-wrap gap-4">
@@ -426,14 +454,14 @@ function Hero() {
                 fontFamily: "Inter, sans-serif",
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.transform = "scale(1.03)"
+                e.currentTarget.style.transform = "scale(1.03)";
                 e.currentTarget.style.boxShadow =
-                  "0 0 40px rgba(139,92,246,0.6)"
+                  "0 0 40px rgba(139,92,246,0.6)";
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.transform = "scale(1)"
+                e.currentTarget.style.transform = "scale(1)";
                 e.currentTarget.style.boxShadow =
-                  "0 0 24px rgba(139,92,246,0.35)"
+                  "0 0 24px rgba(139,92,246,0.35)";
               }}
             >
               View Projects
@@ -448,12 +476,12 @@ function Hero() {
                 fontFamily: "Inter, sans-serif",
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.background = "rgba(139,92,246,0.12)"
-                e.currentTarget.style.borderColor = "rgba(139,92,246,0.7)"
+                e.currentTarget.style.background = "rgba(139,92,246,0.12)";
+                e.currentTarget.style.borderColor = "rgba(139,92,246,0.7)";
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.background = "rgba(139,92,246,0.05)"
-                e.currentTarget.style.borderColor = "rgba(139,92,246,0.4)"
+                e.currentTarget.style.background = "rgba(139,92,246,0.05)";
+                e.currentTarget.style.borderColor = "rgba(139,92,246,0.4)";
               }}
             >
               Contact Me
@@ -470,12 +498,12 @@ function Hero() {
                 fontFamily: "Inter, sans-serif",
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.background = "rgba(139,92,246,0.12)"
-                e.currentTarget.style.borderColor = "rgba(139,92,246,0.7)"
+                e.currentTarget.style.background = "rgba(139,92,246,0.12)";
+                e.currentTarget.style.borderColor = "rgba(139,92,246,0.7)";
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.background = "rgba(139,92,246,0.05)"
-                e.currentTarget.style.borderColor = "rgba(139,92,246,0.4)"
+                e.currentTarget.style.background = "rgba(139,92,246,0.05)";
+                e.currentTarget.style.borderColor = "rgba(139,92,246,0.4)";
               }}
             >
               Resume ↓
@@ -508,7 +536,7 @@ function Hero() {
 
         {/* right */}
         <div className="flex justify-center items-center">
-          <ProfileCard imageUrl="/profile.webp" />
+          <ProfileCard imageUrl="/ajeem-suban.webp" />
         </div>
       </div>
 
@@ -520,18 +548,21 @@ function Hero() {
         <div className="w-px h-8 bg-gradient-to-b from-transparent via-purple-600 to-transparent" />
       </div>
     </section>
-  )
+  );
 }
 
 // ─── About ────────────────────────────────────────────────────────────────────
 function About() {
-  const idleReady = useIdleMount()
+  const idleReady = useIdleMount();
   const skillGroups = [
-    { label: "AI / ML", items: ["Tamil NLP", "RAG Systems", "LLM Infra", "OCR/CV"] },
+    {
+      label: "AI / ML",
+      items: ["Tamil NLP", "RAG Systems", "LLM Infra", "OCR/CV"],
+    },
     { label: "Backend", items: ["FastAPI", "REST APIs", "SQLite", "Docker"] },
     { label: "AI Infra", items: ["ChromaDB", "Ollama", "Hugging Face"] },
     { label: "Frontend", items: ["React", "TypeScript", "Vite"] },
-  ]
+  ];
 
   return (
     <section id="about" className="relative py-28 px-6">
@@ -584,10 +615,10 @@ function About() {
             className="text-gray-400 leading-relaxed mb-6"
             style={{ fontFamily: "Inter, sans-serif" }}
           >
-            I'm a 3rd-year B.Tech AI &amp; Data Science student at
-            Dhanalakshmi Srinivasan University and the founder/creator of{" "}
-            <strong className="text-purple-300 font-medium">TAMIL-AI</strong>,
-            a Tamil-first NLP/RAG platform. I design and build AI/ML systems —
+            I'm a 3rd-year B.Tech AI &amp; Data Science student at Dhanalakshmi
+            Srinivasan University and the founder/creator of{" "}
+            <strong className="text-purple-300 font-medium">TAMIL-AI</strong>, a
+            Tamil-first NLP/RAG platform. I design and build AI/ML systems —
             translation pipelines, retrieval-augmented generation, and OCR —
             with a focus on closing the gap between modern LLM capability and
             underrepresented languages like Tamil.
@@ -598,9 +629,9 @@ function About() {
           >
             Beyond TAMIL-AI, I build agentic and applied-AI systems: TITAN, a
             personal AI workspace; VCH-AGENT, a predictive content-intelligence
-            system; and smaller tools like an emergency-dispatch prototype and
-            a computer-vision eye-care daemon. Code and write-ups for all of
-            these are on{" "}
+            system; and smaller tools like an emergency-dispatch prototype and a
+            computer-vision eye-care daemon. Code and write-ups for all of these
+            are on{" "}
             <a
               href="https://github.com/ajeem-suban"
               target="_blank"
@@ -640,7 +671,7 @@ function About() {
         </div>
       </div>
     </section>
-  )
+  );
 }
 
 // ─── Tech Stack ───────────────────────────────────────────────────────────────
@@ -658,7 +689,7 @@ function TechStack() {
     { name: "IndicTrans2", icon: Languages, color: "#8b5cf6" },
     { name: "OpenCV", icon: SiOpencv, color: "#5c3ee8" },
     { name: "Docker", icon: SiDocker, color: "#2496ed" },
-  ]
+  ];
 
   return (
     <section id="stack" className="relative py-28 px-6">
@@ -678,7 +709,7 @@ function TechStack() {
         <TechMarquee items={tech} />
       </div>
     </section>
-  )
+  );
 }
 
 // ─── TiltCard ─────────────────────────────────────────────────────────────────
@@ -689,52 +720,52 @@ function TiltCard({
   showPill = false,
   rounded = "rounded-2xl",
 }: {
-  children: React.ReactNode
-  className?: string
-  intensity?: number
-  showPill?: boolean
-  rounded?: string
+  children: React.ReactNode;
+  className?: string;
+  intensity?: number;
+  showPill?: boolean;
+  rounded?: string;
 }) {
-  const ref = useRef<HTMLDivElement>(null)
-  const rectRef = useRef<DOMRect | null>(null)
-  const rafRef = useRef(0)
+  const ref = useRef<HTMLDivElement>(null);
+  const rectRef = useRef<DOMRect | null>(null);
+  const rafRef = useRef(0);
 
   // read layout once per hover session instead of once per mousemove event —
   // this is the actual forced-reflow fix: a card's position essentially
   // never changes mid-hover, so there's no reason to re-measure it 60x/sec
   const onEnter = useCallback(() => {
-    if (ref.current) rectRef.current = ref.current.getBoundingClientRect()
-  }, [])
+    if (ref.current) rectRef.current = ref.current.getBoundingClientRect();
+  }, []);
 
   const onMove = useCallback(
     (e: React.MouseEvent<HTMLDivElement>) => {
-      const el = ref.current
-      if (!el || rafRef.current) return
-      const { clientX, clientY } = e
+      const el = ref.current;
+      if (!el || rafRef.current) return;
+      const { clientX, clientY } = e;
       rafRef.current = requestAnimationFrame(() => {
-        rafRef.current = 0
-        const rect = rectRef.current ?? el.getBoundingClientRect()
-        const x = (clientX - rect.left) / rect.width - 0.5
-        const y = (clientY - rect.top) / rect.height - 0.5
-        el.style.transform = `perspective(800px) rotateY(${x * intensity}deg) rotateX(${-y * intensity}deg) scale(1.015) translateZ(10px)`
-        el.style.boxShadow = `${x * -20}px ${y * -20}px 40px rgba(139,92,246,0.2), 0 0 60px rgba(139,92,246,0.1)`
-      })
+        rafRef.current = 0;
+        const rect = rectRef.current ?? el.getBoundingClientRect();
+        const x = (clientX - rect.left) / rect.width - 0.5;
+        const y = (clientY - rect.top) / rect.height - 0.5;
+        el.style.transform = `perspective(800px) rotateY(${x * intensity}deg) rotateX(${-y * intensity}deg) scale(1.015) translateZ(10px)`;
+        el.style.boxShadow = `${x * -20}px ${y * -20}px 40px rgba(139,92,246,0.2), 0 0 60px rgba(139,92,246,0.1)`;
+      });
     },
     [intensity],
-  )
+  );
 
   const onLeave = useCallback(() => {
     if (rafRef.current) {
-      cancelAnimationFrame(rafRef.current)
-      rafRef.current = 0
+      cancelAnimationFrame(rafRef.current);
+      rafRef.current = 0;
     }
-    rectRef.current = null
-    const el = ref.current
-    if (!el) return
+    rectRef.current = null;
+    const el = ref.current;
+    if (!el) return;
     el.style.transform =
-      "perspective(800px) rotateY(0deg) rotateX(0deg) scale(1) translateZ(0px)"
-    el.style.boxShadow = ""
-  }, [])
+      "perspective(800px) rotateY(0deg) rotateX(0deg) scale(1) translateZ(0px)";
+    el.style.boxShadow = "";
+  }, []);
 
   return (
     <div
@@ -748,7 +779,7 @@ function TiltCard({
     >
       {children}
     </div>
-  )
+  );
 }
 
 // ─── Projects ─────────────────────────────────────────────────────────────────
@@ -845,7 +876,7 @@ function Projects() {
       status: "Research",
       github: "#", // TODO: add repo link once pushed
     },
-  ]
+  ];
 
   return (
     <section id="projects" className="relative py-28 px-6">
@@ -868,7 +899,11 @@ function Projects() {
           initial="hidden"
           whileInView="show"
           viewport={{ once: false, amount: 0.1 }}
-          variants={{ show: { transition: { staggerChildren: 0.09, delayChildren: 0.05 } } }}
+          variants={{
+            show: {
+              transition: { staggerChildren: 0.09, delayChildren: 0.05 },
+            },
+          }}
         >
           {projects.map((p, i) => (
             <motion.div
@@ -876,115 +911,97 @@ function Projects() {
               variants={projectAssembleVariant(i)}
               className={p.featured ? "md:col-span-2" : ""}
             >
-            <TiltCard showPill>
-              <div className="p-6">
-                <div className="flex items-start justify-between mb-4">
-                  <div>
-                    <div className="flex items-center gap-2 mb-1">
-                      <h3
-                        className="project-title-pop font-display font-bold text-xl text-white"
-                        style={{ letterSpacing: "-0.01em" }}
-                      >
-                        {p.name.split("").map((ch, ci) => (
-                          <span
-                            key={ci}
-                            className="letter"
-                            style={{ transitionDelay: `${ci * 12}ms` }}
-                          >
-                            {ch === " " ? "\u00A0" : ch}
-                          </span>
-                        ))}
-                      </h3>
-                      {p.featured && (
-                        <span
-                          className="px-2 py-0.5 rounded-full text-[10px] font-mono font-semibold tracking-wider text-white flex-shrink-0"
-                          style={{ background: "linear-gradient(135deg, #7c3aed, #a855f7)" }}
+              <TiltCard showPill>
+                <div className="p-6">
+                  <div className="flex items-start justify-between mb-4">
+                    <div>
+                      <div className="flex items-center gap-2 mb-1">
+                        <h3
+                          className="project-title-pop font-display font-bold text-xl text-white"
+                          style={{ letterSpacing: "-0.01em" }}
                         >
-                          FEATURED
-                        </span>
+                          {p.name.split("").map((ch, ci) => (
+                            <span
+                              key={ci}
+                              className="letter"
+                              style={{ transitionDelay: `${ci * 12}ms` }}
+                            >
+                              {ch === " " ? "\u00A0" : ch}
+                            </span>
+                          ))}
+                        </h3>
+                        {p.featured && (
+                          <span
+                            className="px-2 py-0.5 rounded-full text-[10px] font-mono font-semibold tracking-wider text-white flex-shrink-0"
+                            style={{
+                              background:
+                                "linear-gradient(135deg, #7c3aed, #a855f7)",
+                            }}
+                          >
+                            FEATURED
+                          </span>
+                        )}
+                      </div>
+                      <p className="text-sm text-purple-300">{p.tagline}</p>
+                      {p.role && (
+                        <p
+                          className="text-xs text-gray-400 mt-0.5"
+                          style={{ fontFamily: "Inter, sans-serif" }}
+                        >
+                          {p.role}
+                        </p>
                       )}
                     </div>
-                    <p className="text-sm text-purple-300">{p.tagline}</p>
-                    {p.role && (
-                      <p
-                        className="text-xs text-gray-400 mt-0.5"
-                        style={{ fontFamily: "Inter, sans-serif" }}
-                      >
-                        {p.role}
-                      </p>
-                    )}
-                  </div>
-                  <span
-                    className="px-2.5 py-1 rounded-full text-xs font-mono font-medium flex-shrink-0"
-                    style={{
-                      background: `${p.color}22`,
-                      color: p.color,
-                      border: `1px solid ${p.color}44`,
-                    }}
-                  >
-                    {p.status}
-                  </span>
-                </div>
-
-                <p
-                  className="text-sm text-gray-400 leading-relaxed mb-5"
-                  style={{ fontFamily: "Inter, sans-serif" }}
-                >
-                  {p.desc}
-                </p>
-
-                <div className="flex flex-wrap gap-2 mb-5">
-                  {p.tags.map((t) => (
                     <span
-                      key={t}
-                      className="px-2.5 py-1 rounded-md text-xs text-gray-400"
+                      className="px-2.5 py-1 rounded-full text-xs font-mono font-medium flex-shrink-0"
                       style={{
-                        background: "rgba(255,255,255,0.03)",
-                        border: "1px solid rgba(255,255,255,0.07)",
-                        fontFamily: "JetBrains Mono, monospace",
+                        background: `${p.color}22`,
+                        color: p.color,
+                        border: `1px solid ${p.color}44`,
                       }}
                     >
-                      {t}
+                      {p.status}
                     </span>
-                  ))}
-                </div>
+                  </div>
 
-                <div className="flex gap-3">
-                  <a
-                    href={p.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={p.github === "#" ? undefined : `${p.name} on GitHub`}
-                    className="flex items-center gap-1.5 text-xs font-medium text-purple-300 transition-colors hover:text-purple-200"
+                  <p
+                    className="text-sm text-gray-400 leading-relaxed mb-5"
                     style={{ fontFamily: "Inter, sans-serif" }}
-                    onClick={(e) => {
-                      if (p.github === "#") e.preventDefault()
-                    }}
                   >
-                    <span>{p.github === "#" ? "Repo (soon)" : "GitHub"}</span>
-                    <svg
-                      width="12"
-                      height="12"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      aria-hidden="true"
-                      focusable="false"
-                    >
-                      <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" />
-                    </svg>
-                  </a>
-                  {p.huggingface && (
+                    {p.desc}
+                  </p>
+
+                  <div className="flex flex-wrap gap-2 mb-5">
+                    {p.tags.map((t) => (
+                      <span
+                        key={t}
+                        className="px-2.5 py-1 rounded-md text-xs text-gray-400"
+                        style={{
+                          background: "rgba(255,255,255,0.03)",
+                          border: "1px solid rgba(255,255,255,0.07)",
+                          fontFamily: "JetBrains Mono, monospace",
+                        }}
+                      >
+                        {t}
+                      </span>
+                    ))}
+                  </div>
+
+                  <div className="flex gap-3">
                     <a
-                      href={p.huggingface}
+                      href={p.github}
                       target="_blank"
                       rel="noopener noreferrer"
-                      aria-label={`${p.name} on Hugging Face`}
-                      className="flex items-center gap-1.5 text-xs font-medium text-yellow-400 transition-colors hover:text-yellow-300"
+                      aria-label={
+                        p.github === "#" ? undefined : `${p.name} on GitHub`
+                      }
+                      className="flex items-center gap-1.5 text-xs font-medium text-purple-300 transition-colors hover:text-purple-200"
                       style={{ fontFamily: "Inter, sans-serif" }}
+                      onClick={(e) => {
+                        if (p.github === "#") e.preventDefault();
+                      }}
                     >
-                      <span>Hugging Face</span>
+                      <span>{p.github === "#" ? "Repo (soon)" : "GitHub"}</span>
                       <svg
                         width="12"
                         height="12"
@@ -995,49 +1012,109 @@ function Projects() {
                         aria-hidden="true"
                         focusable="false"
                       >
-                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-                        <polyline points="15 3 21 3 21 9" />
-                        <line x1="10" y1="14" x2="21" y2="3" />
+                        <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" />
                       </svg>
                     </a>
-                  )}
-                  {p.demo && (
-                    <a
-                      href={p.demo}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label={`${p.name} live demo`}
-                      className="flex items-center gap-1.5 text-xs font-medium transition-colors"
-                      style={{ fontFamily: "Inter, sans-serif", color: p.color }}
-                    >
-                      <span>Live Demo</span>
-                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true" focusable="false">
-                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-                        <polyline points="15 3 21 3 21 9" />
-                        <line x1="10" y1="14" x2="21" y2="3" />
-                      </svg>
-                    </a>
-                  )}
+                    {p.huggingface && (
+                      <a
+                        href={p.huggingface}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={`${p.name} on Hugging Face`}
+                        className="flex items-center gap-1.5 text-xs font-medium text-yellow-400 transition-colors hover:text-yellow-300"
+                        style={{ fontFamily: "Inter, sans-serif" }}
+                      >
+                        <span>Hugging Face</span>
+                        <svg
+                          width="12"
+                          height="12"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          aria-hidden="true"
+                          focusable="false"
+                        >
+                          <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                          <polyline points="15 3 21 3 21 9" />
+                          <line x1="10" y1="14" x2="21" y2="3" />
+                        </svg>
+                      </a>
+                    )}
+                    {p.demo && (
+                      <a
+                        href={p.demo}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={`${p.name} live demo`}
+                        className="flex items-center gap-1.5 text-xs font-medium transition-colors"
+                        style={{
+                          fontFamily: "Inter, sans-serif",
+                          color: p.color,
+                        }}
+                      >
+                        <span>Live Demo</span>
+                        <svg
+                          width="12"
+                          height="12"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          aria-hidden="true"
+                          focusable="false"
+                        >
+                          <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                          <polyline points="15 3 21 3 21 9" />
+                          <line x1="10" y1="14" x2="21" y2="3" />
+                        </svg>
+                      </a>
+                    )}
+                  </div>
                 </div>
-              </div>
-            </TiltCard>
+              </TiltCard>
             </motion.div>
           ))}
         </motion.div>
       </div>
     </section>
-  )
+  );
 }
 
 // ─── AI Toolkit ───────────────────────────────────────────────────────────────
 function AIToolkit() {
   const tools = [
-    { name: "Claude", icon: SiClaude, color: "#D97757", role: "Architecture & code" },
-    { name: "ChatGPT", icon: OpenAiIcon, color: "#74AA9C", role: "Ideation & drafting" },
-    { name: "Gemini", icon: SiGooglegemini, color: "#8E75B2", role: "Research & summarization" },
-    { name: "Perplexity", icon: SiPerplexity, color: "#20808D", role: "Sourced research" },
-    { name: "DeepSeek", icon: SiDeepseek, color: "#4D6BFE", role: "Reasoning & study" },
-  ]
+    {
+      name: "Claude",
+      icon: SiClaude,
+      color: "#D97757",
+      role: "Architecture & code",
+    },
+    {
+      name: "ChatGPT",
+      icon: OpenAiIcon,
+      color: "#74AA9C",
+      role: "Ideation & drafting",
+    },
+    {
+      name: "Gemini",
+      icon: SiGooglegemini,
+      color: "#8E75B2",
+      role: "Research & summarization",
+    },
+    {
+      name: "Perplexity",
+      icon: SiPerplexity,
+      color: "#20808D",
+      role: "Sourced research",
+    },
+    {
+      name: "DeepSeek",
+      icon: SiDeepseek,
+      color: "#4D6BFE",
+      role: "Reasoning & study",
+    },
+  ];
 
   const skills = [
     {
@@ -1060,7 +1137,7 @@ function AIToolkit() {
       detail:
         "Turn dense papers and docs into working understanding — using AI to explain, quiz, and stress-test what I know.",
     },
-  ]
+  ];
 
   return (
     <section id="ai-toolkit" className="relative py-28 px-6">
@@ -1112,7 +1189,7 @@ function AIToolkit() {
         </div>
       </div>
     </section>
-  )
+  );
 }
 
 // ─── Contact ──────────────────────────────────────────────────────────────────
@@ -1122,43 +1199,43 @@ function AIToolkit() {
 function ContactLinkCard({
   link,
 }: {
-  link: { label: string; icon: IconType; href: string; desc: string }
+  link: { label: string; icon: IconType; href: string; desc: string };
 }) {
-  const ref = useRef<HTMLAnchorElement>(null)
-  const rectRef = useRef<DOMRect | null>(null)
-  const rafRef = useRef(0)
+  const ref = useRef<HTMLAnchorElement>(null);
+  const rectRef = useRef<DOMRect | null>(null);
+  const rafRef = useRef(0);
 
   const onEnter = useCallback(() => {
-    if (ref.current) rectRef.current = ref.current.getBoundingClientRect()
-  }, [])
+    if (ref.current) rectRef.current = ref.current.getBoundingClientRect();
+  }, []);
 
   const onMove = useCallback((e: React.MouseEvent<HTMLAnchorElement>) => {
-    const el = ref.current
-    if (!el || rafRef.current) return
-    const { clientX, clientY } = e
+    const el = ref.current;
+    if (!el || rafRef.current) return;
+    const { clientX, clientY } = e;
     rafRef.current = requestAnimationFrame(() => {
-      rafRef.current = 0
-      const rect = rectRef.current ?? el.getBoundingClientRect()
-      const x = (clientX - rect.left) / rect.width - 0.5
-      const y = (clientY - rect.top) / rect.height - 0.5
-      el.style.transform = `perspective(800px) rotateY(${x * 6}deg) rotateX(${-y * 6}deg) translateZ(4px)`
-      el.style.borderColor = "rgba(139,92,246,0.4)"
-      el.style.boxShadow = `0 12px 30px rgba(139,92,246,0.15)`
-    })
-  }, [])
+      rafRef.current = 0;
+      const rect = rectRef.current ?? el.getBoundingClientRect();
+      const x = (clientX - rect.left) / rect.width - 0.5;
+      const y = (clientY - rect.top) / rect.height - 0.5;
+      el.style.transform = `perspective(800px) rotateY(${x * 6}deg) rotateX(${-y * 6}deg) translateZ(4px)`;
+      el.style.borderColor = "rgba(139,92,246,0.4)";
+      el.style.boxShadow = `0 12px 30px rgba(139,92,246,0.15)`;
+    });
+  }, []);
 
   const onLeave = useCallback(() => {
     if (rafRef.current) {
-      cancelAnimationFrame(rafRef.current)
-      rafRef.current = 0
+      cancelAnimationFrame(rafRef.current);
+      rafRef.current = 0;
     }
-    rectRef.current = null
-    const el = ref.current
-    if (!el) return
-    el.style.transform = ""
-    el.style.borderColor = "rgba(139,92,246,0.2)"
-    el.style.boxShadow = ""
-  }, [])
+    rectRef.current = null;
+    const el = ref.current;
+    if (!el) return;
+    el.style.transform = "";
+    el.style.borderColor = "rgba(139,92,246,0.2)";
+    el.style.boxShadow = "";
+  }, []);
 
   return (
     <a
@@ -1194,11 +1271,11 @@ function ContactLinkCard({
         </div>
       </div>
     </a>
-  )
+  );
 }
 
 function Contact() {
-  const [form, setForm] = useState({ name: "", email: "", message: "" })
+  const [form, setForm] = useState({ name: "", email: "", message: "" });
 
   const links = [
     {
@@ -1225,18 +1302,20 @@ function Contact() {
       href: "mailto:ajeemsuban060@gmail.com",
       desc: "ajeemsuban060@gmail.com",
     },
-  ]
+  ];
 
   const mailtoHref = () => {
-    const subject = encodeURIComponent(`Portfolio contact from ${form.name || "..."}`)
+    const subject = encodeURIComponent(
+      `Portfolio contact from ${form.name || "..."}`,
+    );
     const bodyLines = [
       form.email ? `From: ${form.email}` : "",
       "",
       form.message || "",
-    ].filter(Boolean)
-    const body = encodeURIComponent(bodyLines.join("\n"))
-    return `mailto:ajeemsuban060@gmail.com?subject=${subject}&body=${body}`
-  }
+    ].filter(Boolean);
+    const body = encodeURIComponent(bodyLines.join("\n"));
+    return `mailto:ajeemsuban060@gmail.com?subject=${subject}&body=${body}`;
+  };
 
   return (
     <section id="contact" className="relative py-28 px-6">
@@ -1379,11 +1458,11 @@ function Contact() {
                 }}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.boxShadow =
-                    "0 0 40px rgba(139,92,246,0.5)"
+                    "0 0 40px rgba(139,92,246,0.5)";
                 }}
                 onMouseLeave={(e) => {
                   e.currentTarget.style.boxShadow =
-                    "0 0 24px rgba(139,92,246,0.3)"
+                    "0 0 24px rgba(139,92,246,0.3)";
                 }}
               >
                 Send Message →
@@ -1425,7 +1504,7 @@ function Contact() {
         </div>
       </div>
     </section>
-  )
+  );
 }
 
 // ─── Footer ───────────────────────────────────────────────────────────────────
@@ -1440,7 +1519,8 @@ function Footer() {
           className="text-xs text-gray-400"
           style={{ fontFamily: "Inter, sans-serif" }}
         >
-          © 2026 Ajeem Suban · AI &amp; Data Science Developer · Founder, TAMIL-AI
+          © 2026 Ajeem Suban · AI &amp; Data Science Developer · Founder,
+          TAMIL-AI
         </p>
         <p
           className="text-xs text-gray-400 font-mono"
@@ -1450,12 +1530,12 @@ function Footer() {
         </p>
       </div>
     </footer>
-  )
+  );
 }
 
 // ─── App ──────────────────────────────────────────────────────────────────────
 export default function App() {
-  const idleReady = useIdleMount()
+  const idleReady = useIdleMount();
   return (
     <div className="relative min-h-screen bg-[#0A0A0F] noise-bg overflow-x-hidden">
       <BackgroundOrbs />
@@ -1488,5 +1568,5 @@ export default function App() {
 
       <Footer />
     </div>
-  )
+  );
 }
