@@ -842,7 +842,7 @@ function Projects() {
       status: "MVP Built",
       github: "https://github.com/ajeem-suban/AIRES-AI",
       huggingface: "https://huggingface.co/AJEEM-SUBAN/AIRES-AI",
-      demo: "", // TODO(Ajeem): add live demo URL or a short demo GIF path here
+      demo: "https://aires-demo-eight.vercel.app",
     },
     {
       name: "Eye-Care-Tool",
