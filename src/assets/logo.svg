@@ -1,0 +1,37 @@
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="silver" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="40%" stop-color="#D6D8DB"/>
+      <stop offset="65%" stop-color="#96999F"/>
+      <stop offset="100%" stop-color="#F0F1F2"/>
+    </linearGradient>
+    <linearGradient id="dim" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#8A8C90"/>
+      <stop offset="100%" stop-color="#3E4044"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="512" height="512" fill="#08080A"/>
+
+  <!-- cut-corner badge frame -->
+  <polygon points="120,64 392,64 448,120 448,392 392,448 120,448 64,392 64,120"
+           fill="none" stroke="url(#dim)" stroke-width="1.2" opacity="0.6"/>
+  <polygon points="140,84 372,84 428,140 428,372 372,428 140,428 84,372 84,140"
+           fill="none" stroke="url(#dim)" stroke-width="0.6" opacity="0.35"/>
+
+  <!-- diagonal accent slash behind the letters -->
+  <line x1="230" y1="140" x2="180" y2="372" stroke="url(#silver)" stroke-width="2" opacity="0.5"/>
+
+  <!-- wordmark: bold, slightly skewed for motion -->
+  <g transform="skewX(-6)">
+    <text x="150" y="330" font-family="Helvetica, Arial, sans-serif" font-size="240" font-weight="700"
+          fill="url(#silver)" letter-spacing="-14">AS</text>
+  </g>
+
+  <!-- accent node marks referencing circuit/AI motif -->
+  <circle cx="392" cy="120" r="5" fill="url(#silver)"/>
+  <circle cx="120" cy="392" r="5" fill="url(#silver)"/>
+  <line x1="392" y1="120" x2="392" y2="150" stroke="url(#dim)" stroke-width="1"/>
+  <line x1="120" y1="392" x2="120" y2="362" stroke="url(#dim)" stroke-width="1"/>
+</svg>
