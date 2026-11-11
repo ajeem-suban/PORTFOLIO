@@ -149,7 +149,10 @@ export default function ParticleField() {
       <Canvas
         camera={{ position: [0, 0, 10], fov: 50 }}
         gl={{ antialias: false, alpha: true, powerPreference: "low-power" }}
-        dpr={[1, 1.5]}
+        // Fixed, full-viewport layer: its cost scales with pixel count, and the
+        // soft glow sprites it draws are visually identical at 1x. Capping at
+        // 1 (was up to 1.5) cuts fill cost ~2.25x on high-DPI phones.
+        dpr={1}
       >
         <Glitter mouse={mouse} />
       </Canvas>

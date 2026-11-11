@@ -1,7 +1,10 @@
 import { useRef, useEffect } from "react"
-import { gsap } from "gsap"
+// GSAP itself is loaded on demand inside the effect below, so its ~68 KiB
+// (minified) stays out of the entry bundle that gates first paint. The
+// `gsap.core.Tween` type used for the refs comes from GSAP's global typings.
 import { motion } from "framer-motion"
 import type { IconType } from "react-icons"
+import { runWhenIdle } from "../lib/idle"
 
 interface TechItem {
   name: string
@@ -36,28 +39,69 @@ export default function TechMarquee({ items }: TechMarqueeProps) {
     const trackB = trackRefB.current
     if (!trackA || !trackB) return
 
-    const halfWidthA = trackA.scrollWidth / 2
-    const halfWidthB = trackB.scrollWidth / 2
+    let cancelled = false
+    let started = false
 
-    // row A: right-to-left
-    tweenRefA.current = gsap.fromTo(
-      trackA,
-      { x: 0 },
-      { x: -halfWidthA, duration: items.length * 3.2, ease: "none", repeat: -1 },
-    )
+    const start = () => {
+      if (started || cancelled) return
+      started = true
+      import("gsap").then(({ gsap: g }) => {
+        if (cancelled) return
 
-    // row B: left-to-right (starts pre-offset so it enters seamlessly)
-    tweenRefB.current = gsap.fromTo(
-      trackB,
-      { x: -halfWidthB },
-      { x: 0, duration: items.length * 3.6, ease: "none", repeat: -1 },
-    )
+        const halfWidthA = trackA.scrollWidth / 2
+        const halfWidthB = trackB.scrollWidth / 2
+
+        // row A: right-to-left
+        tweenRefA.current = g.fromTo(
+          trackA,
+          { x: 0 },
+          { x: -halfWidthA, duration: items.length * 3.2, ease: "none", repeat: -1 },
+        )
+
+        // row B: left-to-right (starts pre-offset so it enters seamlessly)
+        tweenRefB.current = g.fromTo(
+          trackB,
+          { x: -halfWidthB },
+          { x: 0, duration: items.length * 3.6, ease: "none", repeat: -1 },
+        )
+      })
+    }
+
+    // The marquee is well below the fold, so its tweens don't need to exist
+    // during first paint. GSAP is loaded and the rows are started by whichever
+    // happens first:
+    //   • the page has loaded, 1.5s have passed and the browser is idle, or
+    //   • the marquee comes within ~1200px of the viewport (so a fast scroller
+    //     never sees the rows sitting un-animated, or row B jump into place).
+    const cancelIdle = runWhenIdle(start, 2500, 1500)
+
+    let io: IntersectionObserver | undefined
+    const host = trackA.parentElement
+    if (host && typeof IntersectionObserver !== "undefined") {
+      io = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) start()
+        },
+        { rootMargin: "1200px 0px" },
+      )
+      io.observe(host)
+    } else {
+      start()
+    }
 
     return () => {
+      cancelled = true
+      cancelIdle()
+      io?.disconnect()
       tweenRefA.current?.kill()
       tweenRefB.current?.kill()
     }
-  }, [items])
+    // Depend on the length, not the array identity: the parent rebuilds `items`
+    // on every render, and re-running this effect would kill the tweens and
+    // restart both rows from their start offset (a visible snap) whenever an
+    // unrelated App state change re-rendered the page.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [items.length])
 
   const renderSet = (list: TechItem[], keyPrefix: string) => (
     <>

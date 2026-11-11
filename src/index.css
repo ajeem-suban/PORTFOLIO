@@ -1,5 +1,39 @@
 @import 'tailwindcss';
 
+/* ─── Self-hosted fonts ───────────────────────────────────────────────────
+   Same families as before (Outfit / Inter / JetBrains Mono), served from our
+   own origin instead of fonts.googleapis.com + fonts.gstatic.com. That removes
+   a render-blocking cross-origin stylesheet and two extra connections from the
+   critical path. Latin subset only (identical unicode-range to Google's latin
+   file); variable wght axis so every weight the site uses comes from one file.
+   font-display: swap preserves the previous no-invisible-text behaviour.
+   Family names are unchanged, so no component CSS or canvas font strings
+   (NameMorphParticles samples "Outfit") need to change. */
+@font-face {
+  font-family: 'Outfit';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 900;
+  src: url('/fonts/outfit-latin-wght-normal.woff2') format('woff2');
+  unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+}
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 900;
+  src: url('/fonts/inter-latin-wght-normal.woff2') format('woff2');
+  unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+}
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 800;
+  src: url('/fonts/jetbrains-mono-latin-wght-normal.woff2') format('woff2');
+  unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+}
+
 @theme {
   --font-sans: 'Inter', sans-serif;
   --font-display: 'Outfit', sans-serif;

@@ -10,13 +10,12 @@
       content="hSfaXrFQ7sGBd8Io2NgmXJRGEhjqVbHd1sTLmyPbBFI"
     />
 
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
-    />
+    <!-- Fonts: self-hosted (see @font-face in src/index.css). Outfit = headings,
+         Inter = hero body copy; both are used above the fold so they are
+         preloaded. JetBrains Mono is only used for small labels, so it loads
+         on demand. crossorigin is required for font preloads even same-origin. -->
+    <link rel="preload" href="/fonts/outfit-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/inter-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin />
 
     <!-- Primary SEO -->
     <title>Ajeem Suban — AI &amp; Data Science Developer | TAMIL-AI Founder</title>
@@ -38,7 +37,6 @@
 
     <!-- Profile image -->
     <link rel="image_src" href="https://ajeem-suban.vercel.app/ajeem-suban.webp" />
-    <link rel="preload" as="image" href="/ajeem-suban.webp" type="image/webp" fetchpriority="high" />
 
     <!-- Open Graph -->
     <meta property="og:type" content="profile" />

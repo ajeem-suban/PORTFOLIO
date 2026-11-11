@@ -275,7 +275,12 @@ function MorphingGlyphs({
  * need it and it would be a meaningful perf/dependency cost for a small
  * decorative element.
  */
-export default function NameMorphParticles() {
+export default function NameMorphParticles({
+  active = true,
+}: {
+  /** false pauses the render loop (e.g. while the section is far off-screen) */
+  active?: boolean
+}) {
   const wordTargets = useWordTargets()
   const [visible, setVisible] = useState(true)
   const [reducedMotion, setReducedMotion] = useState(false)
@@ -304,6 +309,7 @@ export default function NameMorphParticles() {
           camera={{ position: [0, 0, 3.2], fov: 45 }}
           gl={{ antialias: false, alpha: true, powerPreference: "low-power" }}
           dpr={[1, 1.5]}
+          frameloop={active ? "always" : "never"}
         >
           <MorphingGlyphs wordTargets={wordTargets} reducedMotion={reducedMotion} />
         </Canvas>

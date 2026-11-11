@@ -1,11 +1,16 @@
 import { useEffect, useRef, useState, useCallback, lazy, Suspense } from "react"
 import ProfileCard from "./components/ProfileCard"
 // Three.js + react-three-fiber are the largest dependency in the bundle
-// (~190 KiB unused on first load per PageSpeed) and are purely decorative,
-// so both canvases are code-split into their own chunk and only mounted
-// after the browser is idle post-paint — see useIdleMount below. This is
-// what was blocking the hero text (the actual LCP element) behind ~3.2s of
-// Three.js scene setup it didn't need to wait for.
+// (~230 KiB gzipped) and are purely decorative, so both canvases are
+// code-split into their own chunk. Profiling showed that mounting them early
+// is what delays the hero paragraph (the actual LCP element): WebGL setup and
+// the full-viewport canvas layer saturate the main thread right when the hero
+// is trying to paint. So:
+//   • ParticleField (fixed, full-screen) mounts only after the hero entrance
+//     animation has finished AND the page is loaded + idle — see App().
+//   • NameMorphParticles (About section, below the fold) mounts only when
+//     the section approaches the viewport, and pauses while off-screen — see
+//     About().
 const ParticleField = lazy(() => import("./components/ParticleField"))
 const NameMorphParticles = lazy(() => import("./components/NameMorphParticles"))
 import TechMarquee from "./components/TechMarquee"
@@ -32,23 +37,47 @@ import type { IconType } from "react-icons"
 import logo from "@/assets/logo.svg"
 import { Database, Languages, Mail } from "lucide-react"
 import OpenAiIcon from "./components/OpenAiIcon"
+import { runWhenIdle } from "./lib/idle"
 
 // ─── Idle mount gate ────────────────────────────────────────────────────────
-// Delays mounting a subtree until the browser reports it's idle (falls back
-// to a short timeout on browsers without requestIdleCallback, e.g. Safari).
-// Used to keep the decorative Three.js canvases from competing with the
-// initial paint for main-thread time.
+// Becomes true once the page has finished loading and the browser reports
+// idle (see lib/idle.ts; falls back to a short timeout where
+// requestIdleCallback is missing, e.g. Safari). Used to keep decorative work
+// from competing with the initial paint for main-thread time.
 function useIdleMount(timeout = 1500) {
   const [ready, setReady] = useState(false)
-  useEffect(() => {
-    if (typeof window.requestIdleCallback === "function") {
-      const id = window.requestIdleCallback(() => setReady(true), { timeout })
-      return () => window.cancelIdleCallback(id)
-    }
-    const id = window.setTimeout(() => setReady(true), 200)
-    return () => window.clearTimeout(id)
-  }, [timeout])
+  useEffect(() => runWhenIdle(() => setReady(true), timeout), [timeout])
   return ready
+}
+
+// ─── Near-viewport gate ─────────────────────────────────────────────────────
+// `near` tracks whether the element is within `rootMargin` of the viewport
+// (live); `seen` latches true the first time it is, so a heavy child can be
+// mounted lazily on approach and then merely paused/resumed afterwards.
+function useNearViewport<T extends Element>(rootMargin = "300px 0px") {
+  const ref = useRef<T>(null)
+  const [near, setNear] = useState(false)
+  const [seen, setSeen] = useState(false)
+  useEffect(() => {
+    const el = ref.current
+    if (!el) return
+    if (typeof IntersectionObserver === "undefined") {
+      // very old browser: behave like before (always mounted + running)
+      setNear(true)
+      setSeen(true)
+      return
+    }
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        setNear(entry.isIntersecting)
+        if (entry.isIntersecting) setSeen(true)
+      },
+      { rootMargin },
+    )
+    io.observe(el)
+    return () => io.disconnect()
+  }, [rootMargin])
+  return { ref, near, seen }
 }
 
 // ─── Cursor Trail ─────────────────────────────────────────────────────────────
@@ -332,7 +361,10 @@ function Nav() {
 }
 
 // ─── Hero ─────────────────────────────────────────────────────────────────────
-function Hero() {
+// `onEntered` fires once the hero text's entrance animation has finished; App
+// uses it to start the decorative WebGL background only after the hero (the
+// LCP content) is fully on screen.
+function Hero({ onEntered }: { onEntered: () => void }) {
   return (
     <section
       id="hero"
@@ -356,6 +388,7 @@ function Hero() {
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.3 }}
+          onAnimationComplete={onEntered}
         >
           <div
             className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-6 text-xs font-mono font-medium text-purple-300"
@@ -526,7 +559,11 @@ function Hero() {
 
 // ─── About ────────────────────────────────────────────────────────────────────
 function About() {
-  const idleReady = useIdleMount()
+  // The particle-morph canvas sits below the fold: don't create a WebGL
+  // context (or download the Three.js chunk) until the user is about to see
+  // it, and pause its render loop whenever it scrolls far off-screen.
+  const { ref: morphRef, near: morphNear, seen: morphSeen } =
+    useNearViewport<HTMLDivElement>()
   const skillGroups = [
     { label: "AI / ML", items: ["Tamil NLP", "RAG Systems", "LLM Infra", "OCR/CV"] },
     { label: "Backend", items: ["FastAPI", "REST APIs", "SQLite", "Docker"] },
@@ -544,10 +581,10 @@ function About() {
                 No card/box around it on purpose — it renders straight
                 onto the section background so the glow isn't clipped
                 or muddied by a panel behind it. */}
-            <div className="w-80 h-48 md:w-[26rem] md:h-56">
-              {idleReady ? (
+            <div ref={morphRef} className="w-80 h-48 md:w-[26rem] md:h-56">
+              {morphSeen ? (
                 <Suspense fallback={null}>
-                  <NameMorphParticles />
+                  <NameMorphParticles active={morphNear} />
                 </Suspense>
               ) : (
                 <span
@@ -1589,10 +1626,32 @@ function Footer() {
 // ─── App ──────────────────────────────────────────────────────────────────────
 export default function App() {
   const idleReady = useIdleMount()
+  const [heroEntered, setHeroEntered] = useState(false)
+  const [bgReady, setBgReady] = useState(false)
+  const onHeroEntered = useCallback(() => setHeroEntered(true), [])
+
+  // Safety net: if the hero's onAnimationComplete never fires for some
+  // reason, still bring the background in after a few seconds.
+  useEffect(() => {
+    const t = window.setTimeout(() => setHeroEntered(true), 5000)
+    return () => window.clearTimeout(t)
+  }, [])
+
+  // Start the WebGL background (and its ~226 KiB Three.js chunk) a beat AFTER
+  // the hero has finished entering. Requesting it at the instant the entrance
+  // animation ends put the download on the LCP critical path in Lighthouse's
+  // model; 1.5s later it is clear of it, and the particles still fade in
+  // while the user is reading the hero.
+  useEffect(() => {
+    if (!(idleReady && heroEntered)) return
+    const t = window.setTimeout(() => setBgReady(true), 1500)
+    return () => window.clearTimeout(t)
+  }, [idleReady, heroEntered])
+
   return (
     <div className="relative min-h-screen bg-[#0A0A0F] noise-bg overflow-x-hidden">
       <BackgroundOrbs />
-      {idleReady && (
+      {bgReady && (
         <Suspense fallback={null}>
           <ParticleField />
         </Suspense>
@@ -1601,7 +1660,7 @@ export default function App() {
       <Nav />
 
       <main>
-        <Hero />
+        <Hero onEntered={onHeroEntered} />
         <Reveal style="fade-up">
           <About />
         </Reveal>
