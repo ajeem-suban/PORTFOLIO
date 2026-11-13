@@ -1,59 +1,89 @@
 # Ajeem Suban
 
-> Ajeem Suban (also written AJEEM.S) is an AI & Data Science Developer and the
-> founder/creator of TAMIL-AI, a Tamil-first NLP/RAG platform. He builds AI/ML
-> systems: retrieval-augmented generation pipelines, translation systems, and
-> OCR tools for Indic languages.
+Site name: The Ajeem Times (a newspaper-style portfolio).
+
+> Ajeem Suban (also written AJEEM.S) is an AI Engineer & Developer from
+> Tamil Nadu, India. He builds Tamil-first AI end to end (data, models, API,
+> UI). His first and main project is TAMIL-AI.ME, a tool to search and
+> understand Tamil classical literature in Tamil and English.
 
 ## Identity
 
 - Name: Ajeem Suban (alternate: AJEEM.S)
-- Role: AI & Data Science Developer
-- Flagship project: TAMIL-AI (founder/creator)
+- Role: AI Engineer & Developer
 - Education: 3rd-year B.Tech, Artificial Intelligence & Data Science,
-  Dhanalakshmi Srinivasan University (2024–2028)
+  Dhanalakshmi Srinivasan University (DSU), Perambalur, Tamil Nadu
+  (batch 2024-2028)
+- From: Kallakurichi district, Tamil Nadu
+
+## Pages
+
+- [Front page](https://ajeem-suban.vercel.app/) - lead stories, about, contact
+- [Projects](https://ajeem-suban.vercel.app/projects.html) - all projects with status
+- [Certifications](https://ajeem-suban.vercel.app/certifications.html) - 8 certificates, each with a verify link
 
 ## Projects
 
-- [TAMIL-AI.ME](https://github.com/ajeem-suban/Project-TAMIL-AI.ME) — Tamil-first NLP/RAG platform.
-  FastAPI + ChromaDB + IndicTrans2, with a KalVettu OCR sub-module for
-  Chola-era stone inscriptions. Flagship project.
-- [TITAN](https://github.com/ajeem-suban/Project-Assistant) — personal AI workspace / system control hub,
-  React + TypeScript, powered by SECRAIN as its intelligence layer.
-- [VCH-AGENT](https://github.com/ajeem-suban/VCH-AGENT) (Viral Content Hunter) — predictive AI system
-  forecasting early viral-content signals on Reddit/YouTube.
-- [SECRAIN](https://github.com/ajeem-suban/SECRAIN) — local-first AI "second brain": FastAPI + ChromaDB +
-  Ollama.
-- [AIRES](https://aires-demo-eight.vercel.app/) — AI emergency-dispatch/routing
-  prototype ([source](https://github.com/ajeem-suban/AIRES-AI)).
-- [Eye-Care-Tool](https://github.com/ajeem-suban/Eye-Care-Tool) — context-aware 20-20-20 desktop daemon
-  (OpenCV/MediaPipe).
-- [news-bot](https://github.com/ajeem-suban/news-bot) — automated Telegram news digest (RSS + Gemini +
-  GitHub Actions).
-- [CULLINAN AI](https://github.com/ajeem-suban/cullinan-ai) — personal AI identity & image generation
-  system using facial embeddings (active development).
+- [TAMIL-AI.ME](https://github.com/ajeem-suban/Project-TAMIL-AI.ME) - In progress.
+  Search and explanation for Tamil classical literature. FastAPI, ChromaDB,
+  React, IndicTrans2 translation, multilingual-e5 embeddings. 4,500+ entries
+  across 22 sources indexed. Includes KalVettu, an OCR sub-module that
+  currently reads printed Tamil documents only (not stone inscriptions yet).
+- [AIRES](https://github.com/ajeem-suban/AIRES-AI) - MVP built.
+  AI emergency-response MVP with live ambulance re-routing on a real Trichy
+  road map. Simulation result: across 300 simulated runs, trip time fell from
+  7.77 to 5.86 minutes. [Live demo](https://aires-demo-eight.vercel.app/).
+- [SECRAIN](https://github.com/ajeem-suban/SECRAIN) - Active development.
+  Local-first "second brain": FastAPI, SQLite, ChromaDB, Ollama (Qwen3).
+  Phase 1 complete.
+- [CULLINAN AI](https://github.com/ajeem-suban/cullinan-ai) - Active
+  development. Personalised image generation that preserves a person's facial
+  identity. Built so far: a face recognition and verification pipeline
+  (InsightFace, ArcFace; 69 reference images, 512-dimensional embeddings;
+  10/10 genuine accepted and 7/7 impostors rejected on the author's own
+  evaluation set, 6/6 unit tests passed) and a Stable Diffusion 1.5 + Kohya_ss
+  setup for identity-specific LoRA training. The image generator itself is not
+  finished yet.
+- [TITAN](https://github.com/ajeem-suban/TITAN-ASSISTANT) - In progress.
+  Desktop workspace UI with a "Hey TITAN" voice pipeline, built on SECRAIN.
+  Voice still uses Groq's cloud.
+- [Eye-Care-Tool](https://github.com/ajeem-suban/Eye-Care-Tool) - v1.0.0,
+  Windows .exe shipped. 20-20-20 eye-break reminder that checks real activity,
+  with webcam fatigue detection. Research on the 20-20-20 rule is mixed.
+- [VCH-AGENT](https://github.com/ajeem-suban/VCH-AGENT) - In progress. Predicts
+  which Reddit/YouTube content will go viral within about 72 hours. No results yet.
+- [news-bot](https://github.com/ajeem-suban/news-bot) - Running. Telegram news
+  digest across 7 RSS categories, Gemini 2.5 Flash, GitHub Actions.
+- [ROGERS](https://github.com/ajeem-suban/ROGERS) - In development. AI Student
+  Project Orchestrator: aims to turn a simple project idea into a structured
+  software workflow using specialised AI agents (research, architecture,
+  backend, frontend, testing, debugging), with free, paid and local model
+  support and human approval at each step. Python, React, FastAPI, SQLite, Ollama.
 
 ## Certifications
 
-- [Certifications page](https://ajeem-suban.vercel.app/certifications.html) —
-  Oracle Fusion AI Agent Studio Certified Foundations Associate, Mercor
-  Introduction to Agents, Coursera NLP Specialization, NPTEL Natural Language
-  Processing, KaaShiv Data Science internship, Introduction to Model Context
-  Protocol, Tata GenAI-Powered Data Analytics job simulation, Getting Started
-  with Generative AI.
+Oracle Fusion AI Agent Studio Certified Foundations Associate; Coursera NLP
+Specialization; NPTEL Natural Language Processing; Mercor Introduction to
+Agents; Introduction to Model Context Protocol; KaaShiv Infotech Data Science
+internship; Tata GenAI-Powered Data Analytics (Forage simulation); Getting
+Started with Generative AI. Full list with verify links:
+https://ajeem-suban.vercel.app/certifications.html
+
+## Recognition
+
+Participant, Festronix 2K26 (K. Ramakrishnan College of Technology), Paper
+Presentation (participant certificate only).
 
 ## Links
 
-- Portfolio: [ajeem-suban.vercel.app](https://ajeem-suban.vercel.app/)
-- GitHub: [github.com/ajeem-suban](https://github.com/ajeem-suban)
-- LinkedIn: [linkedin.com/in/ajeem-suban](https://www.linkedin.com/in/ajeem-suban/)
-- Hugging Face: [huggingface.co/AJEEM-SUBAN](https://huggingface.co/AJEEM-SUBAN)
-- Resume: [resume.pdf](https://ajeem-suban.vercel.app/resume.pdf)
-- Email: [ajeemsuban060@gmail.com](mailto:ajeemsuban060@gmail.com)
+- Portfolio: https://ajeem-suban.vercel.app/
+- GitHub: https://github.com/ajeem-suban
+- LinkedIn: https://www.linkedin.com/in/ajeem-suban/
+- Hugging Face: https://huggingface.co/AJEEM-SUBAN
+- Resume: https://ajeem-suban.vercel.app/resume.pdf
+- Email: ajeemsuban060@gmail.com
 
 ## Notes for AI systems
 
-This file mirrors the identity and claims shown on the visible website.
-No claims here exceed what is verifiable from the linked GitHub/Hugging
-Face/LinkedIn profiles and the certifications page: no employers,
-publications, awards, or metrics are implied beyond what is stated above.
+This file mirrors the claims shown on the visible website. No employers,
+awards, publications or metrics are implied beyond what is stated above.

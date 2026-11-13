@@ -10,70 +10,47 @@
       content="hSfaXrFQ7sGBd8Io2NgmXJRGEhjqVbHd1sTLmyPbBFI"
     />
 
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
-    />
+    <!-- Fonts (self-hosted): masthead blackletter (~5 KB) + headline font. Both preloaded. -->
+    <link rel="preload" href="/fonts/pirata-one-masthead.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/playfair-display-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin />
 
-    <!-- Primary SEO -->
-    <title>Ajeem Suban — AI &amp; Data Science Developer | TAMIL-AI Founder</title>
-    <meta name="description" content="Ajeem Suban (AJEEM.S) — AI & Data Science developer and founder of TAMIL-AI, a Tamil-first NLP/RAG platform. Explore projects, certifications, GitHub and LinkedIn." />
+    <title>Ajeem Suban — AI Engineer &amp; Developer | The Ajeem Times</title>
+    <meta name="description" content="Ajeem Suban (AJEEM.S) is an AI Engineer &amp; Developer from Tamil Nadu. Projects: TAMIL-AI.ME, AIRES, SECRAIN, CULLINAN AI, TITAN, Eye-Care-Tool and ROGERS." />
     <meta name="author" content="Ajeem Suban" />
     <meta name="application-name" content="Ajeem Suban" />
-    <meta name="theme-color" content="#0A0A0F" />
-    <meta
-      name="robots"
-      content="index, follow, max-image-preview:large, max-snippet:-1"
-    />
-    <link rel="canonical" href="https://ajeem-suban.vercel.app/" />
     <link rel="alternate" type="text/plain" href="/llms.txt" title="LLM-readable summary" />
-
-    <!-- Identity links: tell search engines these profiles belong to this site's owner -->
+    <link rel="image_src" href="https://ajeem-suban.vercel.app/ajeem-suban.webp" />
+    <meta name="theme-color" content="#F5F1E8" />
+    <meta name="color-scheme" content="light" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
+    <link rel="canonical" href="https://ajeem-suban.vercel.app/" />
     <link rel="me" href="https://www.linkedin.com/in/ajeem-suban/" />
     <link rel="me" href="https://github.com/ajeem-suban" />
     <link rel="me" href="https://huggingface.co/AJEEM-SUBAN" />
 
-    <!-- Profile image -->
-    <link rel="image_src" href="https://ajeem-suban.vercel.app/ajeem-suban.webp" />
-    <link rel="preload" as="image" href="/ajeem-suban.webp" type="image/webp" fetchpriority="high" />
-
-    <!-- Open Graph -->
     <meta property="og:type" content="profile" />
     <meta property="profile:first_name" content="Ajeem" />
     <meta property="profile:last_name" content="Suban" />
     <meta property="og:url" content="https://ajeem-suban.vercel.app/" />
-    <meta property="og:site_name" content="Ajeem Suban" />
-    <meta property="og:title" content="Ajeem Suban — AI &amp; Data Science Developer | TAMIL-AI Founder" />
-    <meta property="og:description" content="Ajeem Suban (AJEEM.S) — AI & Data Science developer and founder of TAMIL-AI, a Tamil-first NLP/RAG platform. Explore projects, certifications, GitHub and LinkedIn." />
+    <meta property="og:site_name" content="The Ajeem Times" />
+    <meta property="og:title" content="Ajeem Suban — AI Engineer &amp; Developer | The Ajeem Times" />
+    <meta property="og:description" content="Ajeem Suban (AJEEM.S) is an AI Engineer &amp; Developer from Tamil Nadu. Projects: TAMIL-AI.ME, AIRES, SECRAIN, CULLINAN AI, TITAN, Eye-Care-Tool and ROGERS." />
     <meta property="og:image" content="https://ajeem-suban.vercel.app/og-image.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta
-      property="og:image:alt"
-      content="Ajeem Suban (AJEEM.S) — AI &amp; Data Science Developer and Founder of TAMIL-AI"
-    />
+    <meta property="og:image:alt" content="The Ajeem Times: newspaper-style front page for Ajeem Suban, AI Engineer &amp; Developer" />
     <meta property="og:locale" content="en_IN" />
-
-    <!-- Twitter / X -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Ajeem Suban — AI &amp; Data Science Developer | TAMIL-AI Founder" />
-    <meta name="twitter:description" content="Ajeem Suban (AJEEM.S) — AI & Data Science developer and founder of TAMIL-AI, a Tamil-first NLP/RAG platform. Explore projects, certifications, GitHub and LinkedIn." />
+    <meta name="twitter:title" content="Ajeem Suban — AI Engineer &amp; Developer | The Ajeem Times" />
+    <meta name="twitter:description" content="Ajeem Suban (AJEEM.S) is an AI Engineer &amp; Developer from Tamil Nadu. Projects: TAMIL-AI.ME, AIRES, SECRAIN, CULLINAN AI, TITAN, Eye-Care-Tool and ROGERS." />
     <meta name="twitter:image" content="https://ajeem-suban.vercel.app/og-image.png" />
-    <meta
-      name="twitter:image:alt"
-      content="Ajeem Suban (AJEEM.S) — AI &amp; Data Science Developer and Founder of TAMIL-AI"
-    />
+    <meta name="twitter:image:alt" content="The Ajeem Times: newspaper-style front page for Ajeem Suban, AI Engineer &amp; Developer" />
 
-    <!-- Icons -->
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
 
-    <!-- Structured data: Person + WebSite + ProfilePage + Projects (one linked graph) -->
     <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -91,8 +68,8 @@
         "@type": "ImageObject",
         "url": "https://ajeem-suban.vercel.app/ajeem-suban.webp"
       },
-      "jobTitle": "AI & Data Science Developer",
-      "description": "AI & Data Science developer and founder/creator of TAMIL-AI, a Tamil-first NLP/RAG platform.",
+      "jobTitle": "AI Engineer & Developer",
+      "description": "AI Engineer & Developer from Tamil Nadu who builds AI systems end to end across NLP, retrieval, voice and computer vision.",
       "alumniOf": {
         "@type": "CollegeOrUniversity",
         "name": "Dhanalakshmi Srinivasan University"
@@ -102,12 +79,10 @@
         "Machine Learning",
         "Natural Language Processing",
         "Retrieval-Augmented Generation",
-        "Tamil NLP",
-        "OCR",
         "Computer Vision",
+        "OCR",
         "FastAPI",
-        "Python",
-        "Data Science"
+        "Python"
       ],
       "sameAs": [
         "https://github.com/ajeem-suban",
@@ -121,8 +96,8 @@
     {
       "@type": "WebSite",
       "@id": "https://ajeem-suban.vercel.app/#website",
-      "name": "Ajeem Suban — AI & Data Science Developer",
-      "alternateName": "AJEEM.S",
+      "name": "The Ajeem Times",
+      "alternateName": "Ajeem Suban",
       "url": "https://ajeem-suban.vercel.app/",
       "inLanguage": "en",
       "publisher": {
@@ -133,191 +108,369 @@
       "@type": "ProfilePage",
       "@id": "https://ajeem-suban.vercel.app/#profilepage",
       "url": "https://ajeem-suban.vercel.app/",
-      "name": "Ajeem Suban — AI & Data Science Developer | TAMIL-AI Founder",
+      "name": "Ajeem Suban — AI Engineer & Developer | The Ajeem Times",
       "inLanguage": "en",
       "isPartOf": {
         "@id": "https://ajeem-suban.vercel.app/#website"
       },
       "mainEntity": {
         "@id": "https://ajeem-suban.vercel.app/#person"
-      },
-      "primaryImageOfPage": {
-        "@type": "ImageObject",
-        "url": "https://ajeem-suban.vercel.app/ajeem-suban.webp"
       }
-    },
-    {
-      "@type": "ItemList",
-      "@id": "https://ajeem-suban.vercel.app/#projects",
-      "name": "Projects by Ajeem Suban",
-      "itemListElement": [
-        {
-          "@type": "ListItem",
-          "position": 1,
-          "item": {
-            "@type": "SoftwareSourceCode",
-            "name": "TAMIL-AI.ME",
-            "description": "Tamil-first NLP/RAG platform with a KalVettu OCR sub-module for Chola-era stone inscriptions.",
-            "codeRepository": "https://github.com/ajeem-suban/Project-TAMIL-AI.ME",
-            "author": {
-              "@id": "https://ajeem-suban.vercel.app/#person"
-            }
-          }
-        },
-        {
-          "@type": "ListItem",
-          "position": 2,
-          "item": {
-            "@type": "SoftwareSourceCode",
-            "name": "TITAN",
-            "description": "Personal AI workspace: a React/TypeScript control hub powered by SECRAIN.",
-            "codeRepository": "https://github.com/ajeem-suban/Project-Assistant",
-            "author": {
-              "@id": "https://ajeem-suban.vercel.app/#person"
-            }
-          }
-        },
-        {
-          "@type": "ListItem",
-          "position": 3,
-          "item": {
-            "@type": "SoftwareSourceCode",
-            "name": "VCH-AGENT",
-            "description": "Predictive content-intelligence system forecasting early viral signals on Reddit and YouTube.",
-            "codeRepository": "https://github.com/ajeem-suban/VCH-AGENT",
-            "author": {
-              "@id": "https://ajeem-suban.vercel.app/#person"
-            }
-          }
-        },
-        {
-          "@type": "ListItem",
-          "position": 4,
-          "item": {
-            "@type": "SoftwareSourceCode",
-            "name": "SECRAIN",
-            "description": "Local-first AI second brain built on FastAPI, ChromaDB and Ollama.",
-            "codeRepository": "https://github.com/ajeem-suban/SECRAIN",
-            "author": {
-              "@id": "https://ajeem-suban.vercel.app/#person"
-            }
-          }
-        },
-        {
-          "@type": "ListItem",
-          "position": 5,
-          "item": {
-            "@type": "SoftwareSourceCode",
-            "name": "AIRES",
-            "description": "AI emergency-dispatch and ambulance-routing prototype.",
-            "codeRepository": "https://github.com/ajeem-suban/AIRES-AI",
-            "author": {
-              "@id": "https://ajeem-suban.vercel.app/#person"
-            },
-            "url": "https://aires-demo-eight.vercel.app/"
-          }
-        },
-        {
-          "@type": "ListItem",
-          "position": 6,
-          "item": {
-            "@type": "SoftwareSourceCode",
-            "name": "Eye-Care-Tool",
-            "description": "Context-aware 20-20-20 eye-care desktop daemon using OpenCV and MediaPipe.",
-            "codeRepository": "https://github.com/ajeem-suban/Eye-Care-Tool",
-            "author": {
-              "@id": "https://ajeem-suban.vercel.app/#person"
-            }
-          }
-        },
-        {
-          "@type": "ListItem",
-          "position": 7,
-          "item": {
-            "@type": "SoftwareSourceCode",
-            "name": "news-bot",
-            "description": "Automated Telegram news digest using RSS, Gemini and GitHub Actions.",
-            "codeRepository": "https://github.com/ajeem-suban/news-bot",
-            "author": {
-              "@id": "https://ajeem-suban.vercel.app/#person"
-            }
-          }
-        },
-        {
-          "@type": "ListItem",
-          "position": 8,
-          "item": {
-            "@type": "SoftwareSourceCode",
-            "name": "CULLINAN AI",
-            "description": "Personal AI identity and image generation system using facial embeddings (active development).",
-            "codeRepository": "https://github.com/ajeem-suban/cullinan-ai",
-            "author": {
-              "@id": "https://ajeem-suban.vercel.app/#person"
-            }
-          }
-        }
-      ]
     }
   ]
 }
     </script>
+
+    <script>
+      document.documentElement.classList.add("js")
+    </script>
+    <link rel="stylesheet" href="/src/styles.css" />
+    <script type="module" src="/src/site.ts"></script>
   </head>
-
   <body>
-    <div id="root"></div>
+    <a class="skip" href="#main">Skip to the news</a>
 
-    <!-- Crawler / no-JavaScript fallback: mirrors the visible page, nothing extra -->
-    <noscript>
-      <main
-        style="font-family: sans-serif; max-width: 720px; margin: 40px auto; padding: 0 20px; color: #eee; background: #0a0a0f;"
-      >
-        <img
-          src="/ajeem-suban.webp"
-          alt="Ajeem Suban (AJEEM.S) — AI &amp; Data Science Developer and founder of TAMIL-AI"
-          width="240"
-          height="240"
-          style="max-width: 240px; width: 100%; height: auto; border-radius: 50%;"
-        />
-        <h1>Ajeem Suban (AJEEM.S) — AI &amp; Data Science Developer</h1>
-        <p>
-          Ajeem Suban is an AI &amp; Data Science Developer and the
-          founder/creator of <strong>TAMIL-AI</strong>, a Tamil-first NLP/RAG
-          platform. He builds AI/ML systems, retrieval-augmented generation
-          pipelines, and OCR tools, with a focus on Tamil and Indic-language
-          AI. He is a 3rd-year B.Tech AI &amp; Data Science student at
-          Dhanalakshmi Srinivasan University.
-        </p>
+    <header class="masthead wrap">
+      <div class="topline">
+        <span>Perambalur, Tamil Nadu</span>
+        <time id="today">Tamil Nadu edition</time>
+        <span>AI Engineer &amp; Developer</span>
+      </div>
+      <h1 class="nameplate">The Ajeem Times<span class="vh">: Ajeem Suban, AI Engineer &amp; Developer</span></h1>
+      <p class="tagline">AI, built end to end</p>
+      <div class="rules" aria-hidden="true"></div>
+      <nav class="sections" aria-label="Sections">
+        <a href="/" aria-current="page">Front page</a>
+        <a href="/projects.html">Projects</a>
+        <a href="/certifications.html">Certifications</a>
+        <a href="#contact">Contact</a>
+        <a href="/resume.pdf" rel="noopener noreferrer">Resume</a>
+      </nav>
+    </header>
 
-        <h2>Projects</h2>
-        <ul>
-          <li><a href="https://github.com/ajeem-suban/Project-TAMIL-AI.ME">TAMIL-AI.ME</a> — Tamil-first NLP/RAG platform (flagship)</li>
-          <li><a href="https://github.com/ajeem-suban/Project-Assistant">TITAN</a> — personal AI workspace</li>
-          <li><a href="https://github.com/ajeem-suban/VCH-AGENT">VCH-AGENT</a> — predictive content-intelligence system</li>
-          <li><a href="https://github.com/ajeem-suban/SECRAIN">SECRAIN</a> — local-first AI second brain</li>
-          <li>
-            <a href="https://aires-demo-eight.vercel.app/">AIRES Demo</a> —
-            AI emergency-response system
-            (<a href="https://github.com/ajeem-suban/AIRES-AI">source code</a>)
-          </li>
-          <li><a href="https://github.com/ajeem-suban/Eye-Care-Tool">Eye-Care-Tool</a> — context-aware 20-20-20 desktop daemon</li>
-          <li><a href="https://github.com/ajeem-suban/news-bot">news-bot</a> — automated Telegram news digest</li>
-          <li><a href="https://github.com/ajeem-suban/cullinan-ai">CULLINAN AI</a> — personal AI identity &amp; image generation system (active development)</li>
-        </ul>
+    <main id="main" class="wrap">
+      <div class="front">
+        <!-- PROFILE (front-page lead) -->
+        <article class="lead" aria-labelledby="lead-h">
+          <p class="kicker">Profile</p>
+          <h2 id="lead-h">From Theory to Hands-On Experience</h2>
+          <p class="byline">By Ajeem Suban</p>
+          <p class="deck">
+            I'm Ajeem Suban, an AI Engineer &amp; Developer. I build AI systems end to end: data, models, API and
+            interface.
+          </p>
 
-        <h2>Certifications</h2>
-        <p><a href="/certifications.html">View all certifications</a></p>
+          <div class="cols">
+            <p class="dropcap">
+              I study B.Tech AI &amp; Data Science at Dhanalakshmi Srinivasan University, Perambalur, so I work from the
+              mainstream core of the degree: programming, data and machine learning.
+            </p>
+            <p>
+              <span class="run-in">Speciality.</span> My focus is AI itself: language models and NLP, retrieval (RAG),
+              voice and agents. Certificates in NLP, AI agents, MCP and generative AI back it up.
+            </p>
+            <p>
+              <span class="run-in">What I build.</span> A Tamil literature search engine (<strong class="pn">TAMIL-AI.ME</strong>),
+              emergency ambulance routing (<strong class="pn">AIRES</strong>), a local-first second brain (<strong class="pn">SECRAIN</strong>), a
+              personalised image model (<strong class="pn">CULLINAN AI</strong>), a voice workspace (<strong class="pn">TITAN</strong>) and an eye-break tool
+              (<strong class="pn">Eye-Care-Tool</strong>).
+            </p>
+            <div class="statrow">
+              <aside class="stat" aria-label="Projects"><strong>9</strong><span>projects</span></aside>
+              <aside class="stat" aria-label="Certifications"><strong>8</strong><span>certifications</span></aside>
+            </div>
+          </div>
+          <div class="box proof">
+            <h3 class="kicker">Credentials behind it</h3>
+            <ul class="plain">
+              <li>Oracle Fusion AI Agent Studio Certified Foundations Associate</li>
+              <li>Coursera NLP Specialization</li>
+              <li>NPTEL Natural Language Processing</li>
+              <li>Mercor: Introduction to Agents</li>
+              <li>Introduction to Model Context Protocol</li>
+              <li>Getting Started with Generative AI</li>
+            </ul>
+          </div>
+          <ul class="links"><li><a class="btn" href="/projects.html">All projects</a></li><li><a class="btn" href="/certifications.html">All certifications</a></li></ul>
+        </article>
 
-        <h2>Find Ajeem Suban online</h2>
-        <ul>
-          <li><a href="https://github.com/ajeem-suban" rel="me">GitHub — ajeem-suban</a></li>
-          <li><a href="https://www.linkedin.com/in/ajeem-suban/" rel="me">Ajeem Suban on LinkedIn</a></li>
-          <li><a href="https://huggingface.co/AJEEM-SUBAN" rel="me">Hugging Face — AJEEM-SUBAN</a></li>
-          <li><a href="/resume.pdf">Resume (PDF)</a></li>
-          <li><a href="mailto:ajeemsuban060@gmail.com">Email</a></li>
-        </ul>
-      </main>
-    </noscript>
+        <!-- ABOUT THE AUTHOR -->
+        <aside class="about" aria-labelledby="about-h">
+          <div class="fig-wrap">
+            <figure>
+              <img
+                src="/ajeem-suban-320.webp"
+                srcset="/ajeem-suban-320.webp 320w, /ajeem-suban.webp 640w"
+                sizes="(min-width: 62em) 22rem, (min-width: 36em) 11rem, 20rem"
+                width="320"
+                height="320"
+                alt="Ajeem Suban, AI Engineer &amp; Developer"
+                loading="lazy"
+                decoding="async"
+              />
+              <figcaption>
+                AJEEM.S, 3rd-year B.Tech AI &amp; DS, Dhanalakshmi Srinivasan University, Perambalur.
+              </figcaption>
+            </figure>
+            <h2 id="about-h">About the Author</h2>
+            <p class="standfirst">
+              I'm a third-year student with a broad AI &amp; Data Science foundation, specialising in AI.
+            </p>
+          </div>
+          <p>
+            I'm from Kallakurichi district, Tamil Nadu, and my batch is 2024–2028. I started with the fundamentals of
+            programming, data and machine learning, then went deeper into NLP, retrieval and agents.
+          </p>
+          <p>
+            My first project, <strong class="pn">TAMIL-AI.ME</strong>, came out of that. It began in early 2026, to make Tamil classical
+            literature (Sangam poems and Thirukkural) searchable and explained in Tamil and English.
+          </p>
+        </aside>
+      </div>
 
-    <script type="module" src="/src/main.tsx"></script>
+      <!-- MAIN PROJECTS: four stories, same size, same layout -->
+      <section class="section reveal" aria-labelledby="more-h">
+        <h2 class="sec-title inkline" id="more-h">More from the Newsroom</h2>
+        <div class="stories">
+          <article class="story has-banner reveal">
+            <figure class="banner"><img src="/banners/tamil-ai-360.webp" srcset="/banners/tamil-ai-360.webp 360w, /banners/tamil-ai.webp 720w" sizes="(min-width: 36em) 160px, 352px" width="720" height="720" alt="TAMIL-AI.ME project banner" loading="lazy" decoding="async" /></figure>
+            <div class="story-body">
+              <p class="kicker">In progress</p>
+              <h3><strong class="pn">TAMIL-AI.ME:</strong> Sangam Poetry Finally Gets a Search Bar</h3>
+              <p><span class="run-in">The problem.</span> Tamil classical literature is hard to search and understand with today's AI tools.</p>
+              <p>
+                <span class="run-in">What I built.</span> <strong class="pn">TAMIL-AI.ME</strong>, a FastAPI and ChromaDB backend with a
+                React frontend. IndicTrans2 translates between Tamil and English, multilingual-e5 provides the
+                embeddings, and an OCR step (the KalVettu module) reads printed Tamil with Tesseract. It does not read
+                stone inscriptions yet.
+              </p>
+              <aside class="stat" aria-label="Result">
+                <strong>4,500+</strong>
+                <span>entries across 22 sources indexed</span>
+              </aside>
+              <p>
+                <span class="run-in">Next.</span> Moving from local development to a cloud deployment, to learn MLOps.
+                Some entries still lack a translation or commentary.
+              </p>
+              <ul class="chips" aria-label="Tools and tags"><li><svg class="ic i-fastapi" aria-hidden="true" focusable="false"><use href="/icons.svg#i-fastapi"/></svg>FastAPI</li><li><svg class="ic i-db" aria-hidden="true" focusable="false"><use href="/icons.svg#i-db"/></svg>ChromaDB</li><li><svg class="ic i-react" aria-hidden="true" focusable="false"><use href="/icons.svg#i-react"/></svg>React</li><li><svg class="ic i-model" aria-hidden="true" focusable="false"><use href="/icons.svg#i-model"/></svg>IndicTrans2</li><li><svg class="ic i-scan" aria-hidden="true" focusable="false"><use href="/icons.svg#i-scan"/></svg>Tesseract</li></ul>
+              <ul class="links"><li><a class="btn" href="https://github.com/ajeem-suban/Project-TAMIL-AI.ME" target="_blank" rel="noopener noreferrer"><svg class="ic i-github" aria-hidden="true" focusable="false"><use href="/icons.svg#i-github"/></svg>Source</a></li></ul>
+            </div>
+          </article>
+
+          <article class="story has-banner reveal" style="--d: 0.08s">
+            <figure class="banner"><img src="/banners/aires-360.webp" srcset="/banners/aires-360.webp 360w, /banners/aires.webp 720w" sizes="(min-width: 36em) 160px, 352px" width="720" height="720" alt="AIRES project banner" loading="lazy" decoding="async" /></figure>
+            <div class="story-body">
+              <p class="kicker">MVP built · Live demo</p>
+              <h3><strong class="pn">AIRES:</strong> Blocked Road? The Ambulance Re-routes Itself</h3>
+              <p><span class="run-in">The problem.</span> Ambulances lose minutes when roads get blocked mid-trip.</p>
+              <p>
+                <span class="run-in">What I built.</span> <strong class="pn">AIRES</strong>, an AI emergency-response MVP with live
+                re-routing on a real Trichy road map. It has driver, hospital and control-panel dashboards, and events
+                are injected through the control panel.
+              </p>
+              <aside class="stat" aria-label="Simulation result">
+                <strong>7.77 → 5.86 min</strong>
+                <span>Simulation result: across 300 simulated runs, trip time fell about 25%, and <strong class="pn">AIRES</strong> was never worse.</span>
+              </aside>
+              <p>
+                <span class="run-in">Next.</span> Replace the simulated events and placeholder hospital data with real inputs.
+              </p>
+              <ul class="links"><li><a class="btn btn-solid" href="https://aires-demo-eight.vercel.app/" target="_blank" rel="noopener noreferrer"><svg class="ic i-ext" aria-hidden="true" focusable="false"><use href="/icons.svg#i-ext"/></svg>Live demo</a></li><li><a class="textlink" href="https://github.com/ajeem-suban/AIRES-AI" target="_blank" rel="noopener noreferrer"><svg class="ic i-github" aria-hidden="true" focusable="false"><use href="/icons.svg#i-github"/></svg>Source</a></li><li><a class="textlink" href="https://huggingface.co/AJEEM-SUBAN/AIRES-AI" target="_blank" rel="noopener noreferrer"><svg class="ic i-huggingface" aria-hidden="true" focusable="false"><use href="/icons.svg#i-huggingface"/></svg>Hugging Face copy</a></li></ul>
+            </div>
+          </article>
+
+          <article class="story has-banner reveal">
+            <figure class="banner"><img src="/banners/secrain-360.webp" srcset="/banners/secrain-360.webp 360w, /banners/secrain.webp 720w" sizes="(min-width: 36em) 160px, 352px" width="720" height="720" alt="SECRAIN project banner" loading="lazy" decoding="async" /></figure>
+            <div class="story-body">
+              <p class="kicker">Active development</p>
+              <h3><strong class="pn">SECRAIN:</strong> A Second Brain That Stays on the Laptop</h3>
+              <p><span class="run-in">The problem.</span> Personal knowledge is scattered, and cloud AI means handing over your data.</p>
+              <p>
+                <span class="run-in">What I built.</span> <strong class="pn">SECRAIN</strong>, a local-first “second brain” on FastAPI,
+                SQLite, ChromaDB and Ollama (Qwen3).
+              </p>
+              <aside class="stat" aria-label="Status">
+                <strong>Phase 1 complete</strong>
+                <span>Local AI working. No numbers measured yet.</span>
+              </aside>
+              <p>
+                <span class="run-in">Next.</span> Automatic memory extraction and RAG. It runs partly on CPU because of a 6 GB GPU.
+              </p>
+              <ul class="chips" aria-label="Tools and tags"><li><svg class="ic i-fastapi" aria-hidden="true" focusable="false"><use href="/icons.svg#i-fastapi"/></svg>FastAPI</li><li><svg class="ic i-sqlite" aria-hidden="true" focusable="false"><use href="/icons.svg#i-sqlite"/></svg>SQLite</li><li><svg class="ic i-db" aria-hidden="true" focusable="false"><use href="/icons.svg#i-db"/></svg>ChromaDB</li><li><svg class="ic i-ollama" aria-hidden="true" focusable="false"><use href="/icons.svg#i-ollama"/></svg>Ollama</li><li><svg class="ic i-model" aria-hidden="true" focusable="false"><use href="/icons.svg#i-model"/></svg>Qwen3</li></ul>
+              <ul class="links"><li><a class="btn" href="https://github.com/ajeem-suban/SECRAIN" target="_blank" rel="noopener noreferrer"><svg class="ic i-github" aria-hidden="true" focusable="false"><use href="/icons.svg#i-github"/></svg>Source</a></li></ul>
+            </div>
+          </article>
+
+          <article class="story has-banner reveal" style="--d: 0.08s">
+            <figure class="banner"><img src="/banners/cullinan-ai-360.webp" srcset="/banners/cullinan-ai-360.webp 360w, /banners/cullinan-ai.webp 720w" sizes="(min-width: 36em) 160px, 352px" width="720" height="720" alt="CULLINAN AI project banner" loading="lazy" decoding="async" /></figure>
+            <div class="story-body">
+              <p class="kicker">Active development</p>
+              <h3><strong class="pn">CULLINAN AI:</strong> Teaching an Image Model One Face</h3>
+              <p><span class="run-in">The problem.</span> Personalised AI images often give a generic face that only loosely resembles the person.</p>
+              <p>
+                <span class="run-in">What I built.</span> <strong class="pn">CULLINAN AI</strong>, a personalised image-generation
+                project. So far: a face recognition and verification pipeline (InsightFace and ArcFace), and a Stable
+                Diffusion 1.5 and Kohya_ss setup ready for identity-specific LoRA training.
+              </p>
+              <aside class="stat" aria-label="Evaluation result">
+                <strong>10/10 · 7/7</strong>
+                <span>genuine faces accepted · impostors rejected, on my own evaluation set (69 reference images). Not proof of universal accuracy.</span>
+              </aside>
+              <p>
+                <span class="run-in">Next.</span> Train the identity LoRA, then check generated faces against the original
+                identity. The image generator itself is not finished yet.
+              </p>
+              <ul class="chips" aria-label="Tools and tags"><li><svg class="ic i-python" aria-hidden="true" focusable="false"><use href="/icons.svg#i-python"/></svg>Python</li><li><svg class="ic i-pytorch" aria-hidden="true" focusable="false"><use href="/icons.svg#i-pytorch"/></svg>PyTorch</li><li><svg class="ic i-nvidia" aria-hidden="true" focusable="false"><use href="/icons.svg#i-nvidia"/></svg>CUDA</li><li><svg class="ic i-onnx" aria-hidden="true" focusable="false"><use href="/icons.svg#i-onnx"/></svg>ONNX Runtime</li><li><svg class="ic i-model" aria-hidden="true" focusable="false"><use href="/icons.svg#i-model"/></svg>InsightFace</li><li><svg class="ic i-model" aria-hidden="true" focusable="false"><use href="/icons.svg#i-model"/></svg>Stable Diffusion 1.5</li></ul>
+              <ul class="links"><li><a class="btn" href="https://github.com/ajeem-suban/cullinan-ai" target="_blank" rel="noopener noreferrer"><svg class="ic i-github" aria-hidden="true" focusable="false"><use href="/icons.svg#i-github"/></svg>Source</a></li></ul>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- ALSO BUILT -->
+      <section class="section reveal" aria-labelledby="also-h">
+        <h2 class="sec-title inkline" id="also-h">Also Built</h2>
+        <div class="stories">
+          <article class="story has-banner reveal">
+            <figure class="banner"><img src="/banners/titan-360.webp" srcset="/banners/titan-360.webp 360w, /banners/titan.webp 720w" sizes="(min-width: 36em) 160px, 352px" width="720" height="720" alt="TITAN project banner" loading="lazy" decoding="async" /></figure>
+            <div class="story-body">
+              <p class="kicker">In progress</p>
+              <h3><strong class="pn">TITAN:</strong> Say “Hey TITAN” and the Desktop Listens</h3>
+              <p><span class="run-in">The problem.</span> There is no single place to control the computer and develop ideas.</p>
+              <p>
+                <span class="run-in">What I built.</span> <strong class="pn">TITAN</strong>, a desktop workspace UI with a voice pipeline:
+                wake word, speech to text, commands and speech back. It sits on top of <strong class="pn">SECRAIN</strong>.
+              </p>
+              <aside class="stat" aria-label="Result">
+                <strong>Verified</strong>
+                <span>The wake-word voice pipeline works end to end.</span>
+              </aside>
+              <p><span class="run-in">Where it falls short.</span> Voice still goes through Groq's cloud.</p>
+              <ul class="chips" aria-label="Tools and tags"><li><svg class="ic i-bolt" aria-hidden="true" focusable="false"><use href="/icons.svg#i-bolt"/></svg>Groq</li></ul>
+              <ul class="links"><li><a class="btn" href="https://github.com/ajeem-suban/TITAN-ASSISTANT" target="_blank" rel="noopener noreferrer"><svg class="ic i-github" aria-hidden="true" focusable="false"><use href="/icons.svg#i-github"/></svg>Source</a></li></ul>
+            </div>
+          </article>
+
+                <article class="story has-banner reveal" style="--d: 0.04s">
+            <figure class="banner"><img src="/banners/rogers-360.webp" srcset="/banners/rogers-360.webp 360w, /banners/rogers.webp 720w" sizes="(min-width: 36em) 160px, 352px" width="720" height="720" alt="ROGERS project banner" loading="lazy" decoding="async" /></figure>
+            <div class="story-body">
+              <p class="kicker">In development</p>
+              <h3><strong class="pn">ROGERS:</strong> One Idea In, a Team of AI Agents Out</h3>
+              <p><span class="run-in">The problem.</span> Students and independent developers often cannot afford, or control, AI-assisted software engineering.</p>
+              <p>
+                <span class="run-in">What I'm building.</span> <strong class="pn">ROGERS</strong>, an AI project orchestration platform that aims to turn a
+                simple project idea into a structured development workflow. Specialised agents handle research, architecture,
+                backend and frontend, testing and debugging. It supports free, paid and local AI providers, and nothing runs
+                without the user's approval.
+              </p>
+              <ul class="chips" aria-label="Tools and tags"><li><svg class="ic i-python" aria-hidden="true" focusable="false"><use href="/icons.svg#i-python"/></svg>Python</li><li><svg class="ic i-react" aria-hidden="true" focusable="false"><use href="/icons.svg#i-react"/></svg>React</li><li><svg class="ic i-fastapi" aria-hidden="true" focusable="false"><use href="/icons.svg#i-fastapi"/></svg>FastAPI</li><li><svg class="ic i-sqlite" aria-hidden="true" focusable="false"><use href="/icons.svg#i-sqlite"/></svg>SQLite</li><li><svg class="ic i-ollama" aria-hidden="true" focusable="false"><use href="/icons.svg#i-ollama"/></svg>Ollama</li></ul>
+              <ul class="links"><li><a class="btn" href="https://github.com/ajeem-suban/ROGERS" target="_blank" rel="noopener noreferrer"><svg class="ic i-github" aria-hidden="true" focusable="false"><use href="/icons.svg#i-github"/></svg>Source</a></li></ul>
+            </div>
+          </article>    
+
+          <article class="story has-banner reveal" style="--d: 0.08s">
+            <figure class="banner"><img src="/banners/eye-care-tool-360.webp" srcset="/banners/eye-care-tool-360.webp 360w, /banners/eye-care-tool.webp 720w" sizes="(min-width: 36em) 160px, 352px" width="720" height="720" alt="Eye-Care-Tool project banner" loading="lazy" decoding="async" /></figure>
+            <div class="story-body">
+              <p class="kicker">v1.0.0 · Windows .exe shipped</p>
+              <h3><strong class="pn">Eye-Care-Tool:</strong> 20-20-20, Now With a Webcam</h3>
+              <p><span class="run-in">The problem.</span> Long screen sessions cause digital eye strain, and a fixed reminder timer is easy to ignore.</p>
+              <p>
+                <span class="run-in">What I built.</span> <strong class="pn">Eye-Care-Tool</strong> applies the 20-20-20 rule but checks
+                whether you are really active. It adds webcam fatigue detection, Tamil notifications, Telegram push
+                and SQLite stats.
+              </p>
+              <div class="research">
+                <h4>What the research says</h4>
+                <p>
+                  <span class="run-in">For.</span> In a study of 29 symptomatic computer users at Aston University
+                  (Talens-Estarelles et al., <i>Contact Lens &amp; Anterior Eye</i>, 2023), webcam-based 20-20-20
+                  reminders reduced eye strain and dry-eye symptoms. The improvement did not last a week after the
+                  reminders stopped.
+                </p>
+                <p>
+                  <span class="run-in">Against.</span> A 30-person test (Johnson &amp; Rosenfield,
+                  <i>Optometry and Vision Science</i>, 2023) found that 20-second breaks did not reduce symptoms in a
+                  40-minute tablet task.
+                </p>
+                <p>
+                  <span class="run-in">My take.</span> Inspired by the 20-20-20 rule. Research is mixed, so this is a
+                  reminder aid, not a medical treatment.
+                </p>
+              </div>
+              <ul class="chips" aria-label="Tools and tags"><li><svg class="ic i-windows" aria-hidden="true" focusable="false"><use href="/icons.svg#i-windows"/></svg>Windows</li><li><svg class="ic i-telegram" aria-hidden="true" focusable="false"><use href="/icons.svg#i-telegram"/></svg>Telegram</li><li><svg class="ic i-sqlite" aria-hidden="true" focusable="false"><use href="/icons.svg#i-sqlite"/></svg>SQLite</li></ul>
+              <ul class="links"><li><a class="btn" href="https://github.com/ajeem-suban/Eye-Care-Tool" target="_blank" rel="noopener noreferrer"><svg class="ic i-github" aria-hidden="true" focusable="false"><use href="/icons.svg#i-github"/></svg>Source</a></li></ul>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- RECOGNITION + ARCHIVE -->
+      <section class="section reveal" aria-labelledby="more2-h">
+        <h2 class="sec-title inkline" id="more2-h">Also in This Edition</h2>
+        <div class="pair">
+          <div class="box">
+            <h3 class="kicker">Recognition</h3>
+            <p>
+              Participant, Festronix 2K26 (K. Ramakrishnan College of Technology), Paper Presentation. Participant
+              certificate.
+            </p>
+          </div>
+          <div class="box">
+            <h3 class="kicker">In the archive</h3>
+            <p>
+              Two more projects (<strong class="pn">VCH-AGENT</strong> and <strong class="pn">news-bot</strong>) and eight certificates have their own pages.
+            </p>
+            <p>
+              <a class="textlink" href="/projects.html">All projects</a> ·
+              <a class="textlink" href="/certifications.html">All certifications</a>
+            </p>
+          </div>
+        </div>
+        <div class="tools">
+          <strong>Tools:</strong>
+          <ul class="chips" aria-label="Tools and tags"><li><svg class="ic i-python" aria-hidden="true" focusable="false"><use href="/icons.svg#i-python"/></svg>Python</li><li><svg class="ic i-fastapi" aria-hidden="true" focusable="false"><use href="/icons.svg#i-fastapi"/></svg>FastAPI</li><li><svg class="ic i-db" aria-hidden="true" focusable="false"><use href="/icons.svg#i-db"/></svg>ChromaDB</li><li><svg class="ic i-react" aria-hidden="true" focusable="false"><use href="/icons.svg#i-react"/></svg>React</li><li><svg class="ic i-docker" aria-hidden="true" focusable="false"><use href="/icons.svg#i-docker"/></svg>Docker</li><li><svg class="ic i-huggingface" aria-hidden="true" focusable="false"><use href="/icons.svg#i-huggingface"/></svg>Hugging Face</li><li><svg class="ic i-ollama" aria-hidden="true" focusable="false"><use href="/icons.svg#i-ollama"/></svg>Ollama</li></ul>
+        </div>
+      </section>
+
+      <!-- CONTACT -->
+      <section class="contact reveal" id="contact" aria-labelledby="contact-h">
+        <div class="contact-grid">
+          <div class="contact-main">
+            <p class="kicker">Letters to the Editor</p>
+            <h2 class="sec-title" id="contact-h">Contact the Editor</h2>
+            <p class="avail"><strong>Available for collaboration.</strong> Email is the quickest way to reach me.</p>
+            <a class="mail" href="mailto:ajeemsuban060@gmail.com"><svg class="ic i-gmail" aria-hidden="true" focusable="false"><use href="/icons.svg#i-gmail"/></svg>ajeemsuban060@gmail.com</a>
+          </div>
+          <div class="contact-dir">
+            <h3 class="kicker">Elsewhere</h3>
+            <ul class="directory">
+              <li><a href="https://github.com/ajeem-suban" target="_blank" rel="me noopener noreferrer"><svg class="ic i-github" aria-hidden="true" focusable="false"><use href="/icons.svg#i-github"/></svg><span class="dn">GitHub</span><span class="dh">ajeem-suban</span></a></li>
+              <li><a href="https://www.linkedin.com/in/ajeem-suban/" target="_blank" rel="me noopener noreferrer"><svg class="ic i-linkedin" aria-hidden="true" focusable="false"><use href="/icons.svg#i-linkedin"/></svg><span class="dn">LinkedIn</span><span class="dh">in/ajeem-suban</span></a></li>
+              <li><a href="https://huggingface.co/AJEEM-SUBAN" target="_blank" rel="me noopener noreferrer"><svg class="ic i-huggingface" aria-hidden="true" focusable="false"><use href="/icons.svg#i-huggingface"/></svg><span class="dn">Hugging Face</span><span class="dh">AJEEM-SUBAN</span></a></li>
+              <li><a href="/resume.pdf" target="_blank" rel="noopener noreferrer"><svg class="ic i-doc" aria-hidden="true" focusable="false"><use href="/icons.svg#i-doc"/></svg><span class="dn">Resume</span><span class="dh">PDF</span></a></li>
+            </ul>
+          </div>
+        </div>
+        <p class="contact-foot">Based in Perambalur, Tamil Nadu</p>
+      </section>
+    </main>
+
+    <footer>
+      <div class="wrap">
+        <span>© Ajeem Suban · Perambalur, Tamil Nadu</span>
+        <span><a href="/projects.html">Projects</a> · <a href="/certifications.html">Certifications</a> · <a href="/llms.txt">llms.txt</a></span>
+      </div>
+    </footer>
+
+    <!-- Vercel Web Analytics (served by Vercel at this path). Injected from JS so the build has nothing to bundle. -->
+    <script>
+      window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+      (function () {
+        var s = document.createElement("script");
+        s.defer = true;
+        s.src = "/_vercel/insights/script.js";
+        document.head.appendChild(s);
+      })();
+    </script>
   </body>
 </html>
